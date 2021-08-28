@@ -8,6 +8,7 @@ import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,7 +22,7 @@ public class Movie {
 
     private String image;
     private String title;
-    private String date;
+    private Date date;
     private Integer rating;
 
     @ManyToOne(cascade = CascadeType.ALL)

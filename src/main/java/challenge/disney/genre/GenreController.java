@@ -12,12 +12,12 @@ public class GenreController {
     GenreRepository genreRepository;
 
     @GetMapping
-    List<Genre> getTeachers() {
+    List<Genre> getGenre() {
         return genreRepository.findAll();
     }
 
     @PostMapping
-    Genre createTeacher(@RequestBody Genre genre) {
+    Genre createGenre(@RequestBody Genre genre) {
         return genreRepository.save(genre);
     }
 }
