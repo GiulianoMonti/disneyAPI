@@ -11,13 +11,5 @@ public class GenreController {
     @Autowired
     GenreRepository genreRepository;
 
-    @GetMapping
-    List<Genre> getGenre() {
-        return genreRepository.findAll();
-    }
 
-    @PostMapping
-    Genre createGenre(@RequestBody Genre genre) {
-        return genreRepository.save(genre);
-    }
 }

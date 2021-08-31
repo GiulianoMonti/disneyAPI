@@ -2,28 +2,28 @@ package challenge.disney.genre;
 
 import challenge.disney.movie.Movie;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+@NoArgsConstructor
 @Entity
-@Getter
-@Setter
+@Data
 public class Genre {
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
     private String name;
     private String image;
 
     @JsonIgnore
     @OneToMany(mappedBy = "genre")
-    private List<Movie> movie = new ArrayList<>();
+    private Set<Movie> movie = new HashSet<>();
 
 }
