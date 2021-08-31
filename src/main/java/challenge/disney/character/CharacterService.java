@@ -3,7 +3,6 @@ package challenge.disney.character;
 import challenge.disney.exception.CharacterNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -32,9 +31,13 @@ public class CharacterService {
                 .collect(Collectors.toList());
     }
 
+
     public Character getCharacter(Long id){
         return repo.findById(id).orElseThrow(()->
                 new CharacterNotFoundException(id));
+    }
+    public List<Character> getCharacterByName(String name){
+        return repo.findByName(name);
     }
 
     public Character deleteCharacter(Long id){

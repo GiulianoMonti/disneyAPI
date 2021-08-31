@@ -1,8 +1,7 @@
 package challenge.disney.character;
 
-import org.apache.coyote.Response;
+import challenge.disney.movie.MovieDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +27,17 @@ public class CharacterController {
         return new ResponseEntity<>(CharacterDto.from(character), HttpStatus.OK);
     }
 
+
+    @GetMapping("/search/{name}")
+    public ResponseEntity<List<CharacterDto>> getCharacterByName(@PathVariable final String name){
+        List<Character> characters =characterService.getCharacterByName(name);
+
+        List<CharacterDto> charactersDto = characters.stream().map(CharacterDto::from).collect(Collectors.toList());
+
+        return new ResponseEntity<>(charactersDto,HttpStatus.OK);
+    }
+
+
     @GetMapping
     public ResponseEntity<List<CharacterDtoFilter>> getCharacters() {
       List<Character> characters =characterService.getCharacters();
@@ -36,12 +46,16 @@ public class CharacterController {
        return new ResponseEntity<>(charactersDto,HttpStatus.OK);
     }
 
+
+
     @GetMapping(value="{id}")
     public ResponseEntity<CharacterDto> getCharacter(@PathVariable final Long id){
         Character character = characterService.getCharacter(id);
         return new ResponseEntity<>(CharacterDto.from(character),HttpStatus.OK);
 
     }
+
+
 
     @DeleteMapping
     public ResponseEntity<CharacterDto> deleteCharacter(@PathVariable final Long id){

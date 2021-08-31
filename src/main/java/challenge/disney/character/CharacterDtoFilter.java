@@ -17,8 +17,7 @@ public class CharacterDtoFilter {
     public static CharacterDtoFilter from(Character character) {
         CharacterDtoFilter characterDtoPlain = new CharacterDtoFilter();
         characterDtoPlain.setId(character.getId());
-        characterDtoPlain.setImage(character.getImage());
-        characterDtoPlain.setName(character.getImage());
+        characterDtoPlain.setName(character.getName());
 
         return characterDtoPlain;
     }
