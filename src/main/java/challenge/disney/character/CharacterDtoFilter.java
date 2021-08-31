@@ -15,10 +15,10 @@ public class CharacterDtoFilter {
 
 
     public static CharacterDtoFilter from(Character character) {
-        CharacterDtoFilter characterDtoPlain = new CharacterDtoFilter();
-        characterDtoPlain.setId(character.getId());
-        characterDtoPlain.setName(character.getName());
+        CharacterDtoFilter characterDtoFilter = new CharacterDtoFilter();
+        characterDtoFilter.setId(character.getId());
+        characterDtoFilter.setName(character.getName());
 
-        return characterDtoPlain;
+        return characterDtoFilter;
     }
 }
