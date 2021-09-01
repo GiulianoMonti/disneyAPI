@@ -39,6 +39,11 @@ public class CharacterService {
     public List<Character> getCharacterByName(String name){
         return repo.findByName(name);
     }
+    public List<Character> getCharacterByAge(Integer age){
+        return repo.findByAge(age);
+    }
+
+
 
     public Character deleteCharacter(Long id){
         Character character = getCharacter(id);

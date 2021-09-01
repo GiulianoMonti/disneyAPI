@@ -37,6 +37,15 @@ public class CharacterController {
         return new ResponseEntity<>(charactersDto,HttpStatus.OK);
     }
 
+    @GetMapping(params = "age")
+    public ResponseEntity<List<CharacterDto>> getCharacterByAge(@RequestParam(value = "age", required = false) Integer age){
+        List<Character> characters =characterService.getCharacterByAge(age);
+
+        List<CharacterDto> charactersDto = characters.stream().map(CharacterDto::from).collect(Collectors.toList());
+
+        return new ResponseEntity<>(charactersDto,HttpStatus.OK);
+    }
+
 
     @GetMapping
     public ResponseEntity<List<CharacterDtoFilter>> getCharacters() {
