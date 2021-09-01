@@ -28,8 +28,8 @@ public class CharacterController {
     }
 
 
-    @GetMapping("/search/{name}")
-    public ResponseEntity<List<CharacterDto>> getCharacterByName(@PathVariable final String name){
+    @GetMapping(params = "name")
+    public ResponseEntity<List<CharacterDto>> getCharacterByName(@RequestParam(value = "name", required = false) String name){
         List<Character> characters =characterService.getCharacterByName(name);
 
         List<CharacterDto> charactersDto = characters.stream().map(CharacterDto::from).collect(Collectors.toList());
@@ -40,10 +40,10 @@ public class CharacterController {
 
     @GetMapping
     public ResponseEntity<List<CharacterDtoFilter>> getCharacters() {
-      List<Character> characters =characterService.getCharacters();
+        List<Character> characters =characterService.getCharacters();
 
-       List<CharacterDtoFilter> charactersDto = characters.stream().map(CharacterDtoFilter::from).collect(Collectors.toList());
-       return new ResponseEntity<>(charactersDto,HttpStatus.OK);
+        List<CharacterDtoFilter> charactersDto = characters.stream().map(CharacterDtoFilter::from).collect(Collectors.toList());
+        return new ResponseEntity<>(charactersDto,HttpStatus.OK);
     }
 
 
