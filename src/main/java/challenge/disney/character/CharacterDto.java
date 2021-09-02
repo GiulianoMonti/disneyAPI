@@ -26,7 +26,7 @@ public class CharacterDto {
         characterDto.setAge(character.getAge());
         characterDto.setWeight(character.getWeight());
         characterDto.setStory(character.getStory());
-       characterDto.setMovie(character.getMovies());
+        characterDto.setMovie(character.getMovies());
         return characterDto;
     }
 }

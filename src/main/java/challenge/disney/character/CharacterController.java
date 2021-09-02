@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +32,7 @@ public class CharacterController {
     public ResponseEntity<CharacterDto> addCharacterToMovie(@PathVariable final Long movieId,
                                                         @PathVariable final Long characterId){
 
-        Character character = characterService.addMovieToCharacter(movieId, characterId);
+        Character character = characterService.addMovieToCharacter(characterId, movieId);
         return new ResponseEntity<>(CharacterDto.from(character), HttpStatus.OK);
     }
 
@@ -70,6 +71,21 @@ public class CharacterController {
         List<Character> characters =characterService.getCharacters();
 
         List<CharacterDtoFilter> charactersDto = characters.stream().map(CharacterDtoFilter::from).collect(Collectors.toList());
+        return new ResponseEntity<>(charactersDto,HttpStatus.OK);
+    }
+
+    // get list with movies
+    @GetMapping("/list")
+    public ResponseEntity<List<CharacterDtoForList>> getCharactersList() {
+        List<Character> characters =characterService.getCharacters();
+
+        List<CharacterDtoForList> charactersDto;
+        List<CharacterDtoForList> list = new ArrayList<>();
+        for (Character character : characters) {
+            CharacterDtoForList from = CharacterDtoForList.from(character);
+            list.add(from);
+        }
+        charactersDto = list;
         return new ResponseEntity<>(charactersDto,HttpStatus.OK);
     }
 

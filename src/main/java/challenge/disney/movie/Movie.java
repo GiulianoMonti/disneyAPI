@@ -2,6 +2,7 @@ package challenge.disney.movie;
 
 import challenge.disney.character.Character;
 import challenge.disney.genre.Genre;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -33,6 +34,7 @@ public class Movie {
 //            joinColumns = @JoinColumn(name = "movie_id"),
 //            inverseJoinColumns = @JoinColumn(name = "character_id")
 //    )
+    @JsonIgnore
     @ManyToOne
     private Character characters;
 
