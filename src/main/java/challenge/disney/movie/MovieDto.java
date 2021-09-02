@@ -29,7 +29,13 @@ public class MovieDto {
         movieDto.setDate(movie.getDate());
         movieDto.setRating(movie.getRating());
         movieDto.setGenre(movie.getGenre());
-//        movieDto.setCharactersDto(movie.getCharacters().stream().map(CharacterDto::from).collect(Collectors.toList()));
+
+//        List<CharacterDto> list = new ArrayList<>();
+//        for (Character character : movie.getCharacters()) {
+//            CharacterDto from = CharacterDto.from(character);
+//            list.add(from);
+//        }
+//        movieDto.setCharactersDto(list);
         return movieDto;
     }
 }

@@ -1,5 +1,6 @@
 package challenge.disney.character;
 
+import challenge.disney.movie.Movie;
 import challenge.disney.movie.MovieDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,14 @@ public class CharacterController {
         Character character = characterService.addCharacter(Character.from(characterDto));
         return new ResponseEntity<>(CharacterDto.from(character), HttpStatus.OK);
     }
+    @PostMapping(value="{characterId}/movies/{movieId}/add")
+    public ResponseEntity<CharacterDto> addCharacterToMovie(@PathVariable final Long movieId,
+                                                        @PathVariable final Long characterId){
+
+        Character character = characterService.addMovieToCharacter(movieId, characterId);
+        return new ResponseEntity<>(CharacterDto.from(character), HttpStatus.OK);
+    }
+
 
 
     @GetMapping(params = "name")
@@ -40,6 +49,15 @@ public class CharacterController {
     @GetMapping(params = "age")
     public ResponseEntity<List<CharacterDto>> getCharacterByAge(@RequestParam(value = "age", required = false) Integer age){
         List<Character> characters =characterService.getCharacterByAge(age);
+
+        List<CharacterDto> charactersDto = characters.stream().map(CharacterDto::from).collect(Collectors.toList());
+
+        return new ResponseEntity<>(charactersDto,HttpStatus.OK);
+    }
+
+    @GetMapping(params = "idMovie")
+    public ResponseEntity<List<CharacterDto>> getCharacterByAge(@RequestParam(value = "idMovie", required = false) String idMovie){
+        List<Character> characters =characterService.getCharacterByMovie(idMovie);
 
         List<CharacterDto> charactersDto = characters.stream().map(CharacterDto::from).collect(Collectors.toList());
 

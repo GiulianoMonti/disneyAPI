@@ -27,8 +27,13 @@ public class Character {
     private String story;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "characters")
-    private List<Movie> movies = new ArrayList<>();
+//    @ManyToMany(mappedBy = "characters")
+    @ManyToOne
+    private Movie movie;
+
+//    public void addMovies(Movie movie){
+//        movies.add(movie);
+//    }
 
     public static Character from(CharacterDto characterDto) {
         Character character = new Character();
@@ -37,6 +42,7 @@ public class Character {
         character.setAge(characterDto.getAge());
         character.setWeight(characterDto.getWeight());
         character.setStory(characterDto.getStory());
+        character.setMovie(characterDto.getMovie());
         return character;
     }
 }

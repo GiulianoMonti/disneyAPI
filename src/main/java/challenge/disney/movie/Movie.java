@@ -24,28 +24,30 @@ public class Movie {
     private Integer rating;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="genre_id",referencedColumnName = "id")
+    @JoinColumn(name = "genre_id", referencedColumnName = "id")
     private Genre genre;
 
-    @ManyToMany
-    @JoinTable(
-            name = "characters_and_movies",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "character_id")
-    )
+    //    @ManyToMany
+//    @JoinTable(
+//            name = "characters_and_movies",
+//            joinColumns = @JoinColumn(name = "movie_id"),
+//            inverseJoinColumns = @JoinColumn(name = "character_id")
+//    )
+    @OneToMany(
+            cascade = CascadeType.ALL)
+    @JoinColumn(name = "character_id")
     private List<Character> characters = new ArrayList<>();
 
 
-
-    public void addCharacter(Character character){
+    public void addCharacter(Character character) {
         characters.add(character);
     }
 
-    public void removeCharacter(Character character){
+    public void removeCharacter(Character character) {
         characters.remove(character);
     }
 
-    public static Movie from(MovieDto movieDto){
+    public static Movie from(MovieDto movieDto) {
         Movie movie = new Movie();
         movie.setImage(movieDto.getImage());
         movie.setTitle(movieDto.getTitle());
