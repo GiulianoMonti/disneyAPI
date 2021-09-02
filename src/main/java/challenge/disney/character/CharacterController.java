@@ -52,7 +52,6 @@ public class CharacterController {
         // hmmmmm..... invention
 //        for(Movie movies: character.getMovies()){
 //            characterService.deleteCharacter(movies.getId());
-//            break;
 //        }
 
 
