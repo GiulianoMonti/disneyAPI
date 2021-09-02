@@ -86,6 +86,12 @@ public class CharacterService {
         return character;
     }
 
+    public Long getCharacterId(Long id){
+        Character character = getCharacter(id);
+      return  character.getId();
+
+    }
+
 
 }
 

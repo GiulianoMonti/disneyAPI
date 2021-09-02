@@ -15,10 +15,9 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/characters")
 public class CharacterController {
-
+    @Autowired
     private final CharacterService characterService;
 
-    @Autowired
     public CharacterController(CharacterService characterService) {
         this.characterService = characterService;
     }
@@ -46,6 +45,19 @@ public class CharacterController {
         return new ResponseEntity<>(CharacterDto.from(character), HttpStatus.OK);
     }
 
+    @DeleteMapping(value = "{id}")
+    public ResponseEntity<CharacterDto> deleteCharacter(@PathVariable final Long id){
+
+        Character character = characterService.deleteCharacter(id);
+        // hmmmmm..... invention
+//        for(Movie movies: character.getMovies()){
+//            characterService.deleteCharacter(movies.getId());
+//            break;
+//        }
+
+
+        return new ResponseEntity<>(CharacterDto.from(character),HttpStatus.OK);
+    }
 
     @GetMapping(params = "name")
     public ResponseEntity<List<CharacterDto>> getCharacterByName(@RequestParam(value = "name", required = false) String name){
@@ -85,13 +97,13 @@ public class CharacterController {
 
     // get list with movies
     @GetMapping("/list")
-    public ResponseEntity<List<CharacterDtoForList>> getCharactersList() {
+    public ResponseEntity<List<CharacterDto>> getCharactersList() {
         List<Character> characters =characterService.getCharacters();
 
-        List<CharacterDtoForList> charactersDto;
-        List<CharacterDtoForList> list = new ArrayList<>();
+        List<CharacterDto> charactersDto;
+        List<CharacterDto> list = new ArrayList<>();
         for (Character character : characters) {
-            CharacterDtoForList from = CharacterDtoForList.from(character);
+            CharacterDto from = CharacterDto.from(character);
             list.add(from);
         }
         charactersDto = list;
@@ -109,11 +121,6 @@ public class CharacterController {
 
 
 
-    @DeleteMapping(value = "{id}")
-    public ResponseEntity<CharacterDto> deleteCharacter(@PathVariable final Long id){
-        Character character = characterService.deleteCharacter(id);
-        return new ResponseEntity<>(CharacterDto.from(character),HttpStatus.OK);
-    }
 
     @PutMapping(value = "{id}")
     public ResponseEntity<CharacterDto> editItem(@PathVariable final Long id,
