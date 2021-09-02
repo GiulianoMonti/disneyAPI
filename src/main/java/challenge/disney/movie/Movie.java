@@ -33,19 +33,9 @@ public class Movie {
 //            joinColumns = @JoinColumn(name = "movie_id"),
 //            inverseJoinColumns = @JoinColumn(name = "character_id")
 //    )
-    @OneToMany(
-            cascade = CascadeType.ALL)
-    @JoinColumn(name = "character_id")
-    private List<Character> characters = new ArrayList<>();
+    @ManyToOne
+    private Character characters;
 
-
-    public void addCharacter(Character character) {
-        characters.add(character);
-    }
-
-    public void removeCharacter(Character character) {
-        characters.remove(character);
-    }
 
     public static Movie from(MovieDto movieDto) {
         Movie movie = new Movie();

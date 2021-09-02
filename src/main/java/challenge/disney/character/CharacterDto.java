@@ -16,7 +16,7 @@ public class CharacterDto {
     private Integer age;
     private Integer weight;
     private String story;
-    private Movie movie;
+    private List <Movie> movie;
 
     public static CharacterDto from(Character character){
         CharacterDto characterDto = new CharacterDto();
@@ -26,7 +26,7 @@ public class CharacterDto {
         characterDto.setAge(character.getAge());
         characterDto.setWeight(character.getWeight());
         characterDto.setStory(character.getStory());
-       characterDto.setMovie(character.getMovie());
+       characterDto.setMovie(character.getMovies());
         return characterDto;
     }
 }

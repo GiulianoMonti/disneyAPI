@@ -15,5 +15,5 @@ public interface CharacterRepository extends JpaRepository<Character, Long> {
 
     public List<Character> findByAge(Integer age);
 
-   public List<Character> findByMovie(String id);
+   public List<Character> findByMovies(String id);
 }

@@ -53,21 +53,21 @@ public class MovieController {
 
     }
 
-    @PostMapping(value="{movieId}/character/{characterId}/add")
-    public ResponseEntity<MovieDto> addMovieToCharacter(@PathVariable final Long movieId,
-                                                        @PathVariable final Long characterId){
-        Movie movie = movieService.addMovieToCharacter(movieId,characterId);
-
-        return new ResponseEntity<>(MovieDto.from(movie),HttpStatus.OK);
-    }
-
-    @DeleteMapping(value="{movieId}/character/{characterId}/remove")
-    public ResponseEntity<MovieDto> removeMovieFromCharacter(@PathVariable final Long movieId,
-                                                        @PathVariable final Long characterId){
-        Movie movie = movieService.removeMovieFromCharacter(movieId,characterId);
-
-        return new ResponseEntity<>(MovieDto.from(movie),HttpStatus.OK);
-    }
+//    @PostMapping(value="{movieId}/character/{characterId}/add")
+//    public ResponseEntity<MovieDto> addMovieToCharacter(@PathVariable final Long movieId,
+//                                                        @PathVariable final Long characterId){
+//        Movie movie = movieService.addMovieToCharacter(movieId,characterId);
+//
+//        return new ResponseEntity<>(MovieDto.from(movie),HttpStatus.OK);
+//    }
+//
+//    @DeleteMapping(value="{movieId}/character/{characterId}/remove")
+//    public ResponseEntity<MovieDto> removeMovieFromCharacter(@PathVariable final Long movieId,
+//                                                        @PathVariable final Long characterId){
+//        Movie movie = movieService.removeMovieFromCharacter(movieId,characterId);
+//
+//        return new ResponseEntity<>(MovieDto.from(movie),HttpStatus.OK);
+//    }
 
 
 }

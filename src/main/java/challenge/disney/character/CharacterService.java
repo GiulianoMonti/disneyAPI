@@ -46,7 +46,7 @@ public class CharacterService {
     }
 
     public List<Character> getCharacterByMovie(String idMovie){
-        return repo.findByMovie(idMovie);
+        return repo.findByMovies(idMovie);
     }
 
 
@@ -69,12 +69,12 @@ public class CharacterService {
     public Character addMovieToCharacter(Long characterId, Long movieId){
         Character character = getCharacter(characterId);
         Movie movie = movieService.getMovie(movieId);
-//        if(Objects.nonNull(movie.getCharacters())){
-//            throw new MovieIsAlreadyAssignedException(movieId,
-//                    character.getMovie().getId());
-//        }
-         movie.addCharacter(character);
-        character.setMovie(movie);
+        if(Objects.nonNull(movie.getCharacters())){
+            throw new MovieIsAlreadyAssignedException(movieId,
+                    movie.getCharacters().getId());
+        }
+        character.addMovies(movie);
+        movie.setCharacters(character);
         return character;
     }
 

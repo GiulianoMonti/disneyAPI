@@ -28,12 +28,19 @@ public class Character {
 
     @JsonIgnore
 //    @ManyToMany(mappedBy = "characters")
-    @ManyToOne
-    private Movie movie;
+    @OneToMany(
+            cascade = CascadeType.ALL)
+    @JoinColumn(name = "movies_id")
+    private List<Movie> movies = new ArrayList<>();
 
-//    public void addMovies(Movie movie){
-//        movies.add(movie);
-//    }
+
+    public void addMovies(Movie movie) {
+        movies.add(movie);
+    }
+
+    public void removeMovies(Movie movie) {
+        movies.remove(movie);
+    }
 
     public static Character from(CharacterDto characterDto) {
         Character character = new Character();
@@ -42,7 +49,7 @@ public class Character {
         character.setAge(characterDto.getAge());
         character.setWeight(characterDto.getWeight());
         character.setStory(characterDto.getStory());
-        character.setMovie(characterDto.getMovie());
+        character.setMovies(characterDto.getMovie());
         return character;
     }
 }

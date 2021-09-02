@@ -19,7 +19,8 @@ public class MovieDto {
     private Integer rating;
     private Genre genre;
 
-    private List<CharacterDto> charactersDto = new ArrayList<>();
+    private CharacterDto characters;
+
 
     public static MovieDto from(Movie movie) {
         MovieDto movieDto = new MovieDto();

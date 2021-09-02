@@ -12,13 +12,13 @@ public class CharacterDtoFilter {
 
     private String image;
     private String name;
-    private Movie movie;
+    private List<Movie> movie;
 
     public static CharacterDtoFilter from(Character character) {
         CharacterDtoFilter characterDtoFilter = new CharacterDtoFilter();
         characterDtoFilter.setId(character.getId());
         characterDtoFilter.setName(character.getName());
-        characterDtoFilter.setMovie(character.getMovie());
+        characterDtoFilter.setMovie(character.getMovies());
 
         return characterDtoFilter;
     }

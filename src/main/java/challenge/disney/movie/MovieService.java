@@ -53,23 +53,23 @@ public class MovieService {
         return movieToEdit;
     }
 
-    @Transactional
-    public Movie addMovieToCharacter(Long movieId, Long characterId){
-        Movie movie = getMovie(movieId);
-        Character character = characterService.getCharacter(characterId);
-//        if(Objects.nonNull(character.getMovies())){
-//            throw new MovieIsAlreadyAssignedException(characterId, character.getMovies().get());
-//        }
-        movie.addCharacter(character);
-        return movie;
-    }
-    @Transactional
-    public Movie removeMovieFromCharacter(Long movieId, Long characterId){
-        Movie movie = getMovie(movieId);
-        Character character = characterService.getCharacter(characterId);
-        movie.removeCharacter(character);
-        return movie;
-    }
+//    @Transactional
+//    public Movie addMovieToCharacter(Long movieId, Long characterId){
+//        Movie movie = getMovie(movieId);
+//        Character character = characterService.getCharacter(characterId);
+////        if(Objects.nonNull(character.getMovies())){
+////            throw new MovieIsAlreadyAssignedException(characterId, character.getMovies().get());
+////        }
+//        movie.addCharacter(character);
+//        return movie;
+//    }
+//    @Transactional
+//    public Movie removeMovieFromCharacter(Long movieId, Long characterId){
+//        Movie movie = getMovie(movieId);
+//        Character character = characterService.getCharacter(characterId);
+//        movie.removeCharacter(character);
+//        return movie;
+//    }
 
 
 }
