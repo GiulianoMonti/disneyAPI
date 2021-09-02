@@ -28,14 +28,23 @@ public class CharacterController {
         Character character = characterService.addCharacter(Character.from(characterDto));
         return new ResponseEntity<>(CharacterDto.from(character), HttpStatus.OK);
     }
+
+    // add movie to character
     @PostMapping(value="{characterId}/movies/{movieId}/add")
-    public ResponseEntity<CharacterDto> addCharacterToMovie(@PathVariable final Long movieId,
+    public ResponseEntity<CharacterDto> addMovieToCharacter(@PathVariable final Long movieId,
                                                         @PathVariable final Long characterId){
 
         Character character = characterService.addMovieToCharacter(characterId, movieId);
         return new ResponseEntity<>(CharacterDto.from(character), HttpStatus.OK);
     }
 
+    // delete movie from character
+    @DeleteMapping(value="{characterId}/movies/{movieId}/remove")
+    public ResponseEntity<CharacterDto> deleteMovieFromCharacter(@PathVariable final Long movieId,
+                                                            @PathVariable final Long characterId){
+        Character character = characterService.removeMovieFromCharacter(movieId, characterId);
+        return new ResponseEntity<>(CharacterDto.from(character), HttpStatus.OK);
+    }
 
 
     @GetMapping(params = "name")
@@ -100,7 +109,7 @@ public class CharacterController {
 
 
 
-    @DeleteMapping
+    @DeleteMapping(value = "{id}")
     public ResponseEntity<CharacterDto> deleteCharacter(@PathVariable final Long id){
         Character character = characterService.deleteCharacter(id);
         return new ResponseEntity<>(CharacterDto.from(character),HttpStatus.OK);

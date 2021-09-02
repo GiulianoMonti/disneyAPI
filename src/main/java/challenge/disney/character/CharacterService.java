@@ -78,6 +78,14 @@ public class CharacterService {
         return character;
     }
 
+        @Transactional
+        public Character removeMovieFromCharacter(Long movieId, Long characterId){
+        Character character = getCharacter(characterId);
+        Movie movie = movieService.getMovie(movieId);
+        character.removeMovies(movie);
+        return character;
+    }
+
 
 }
 
