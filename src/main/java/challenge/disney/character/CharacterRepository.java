@@ -8,12 +8,12 @@ import java.util.List;
 
 @Repository
 public interface CharacterRepository extends JpaRepository<Character, Long> {
-//
+    //
 //    public Character findById(int id);
 //
-     public List<Character> findByName(String name);
+    public List<Character> findByName(String name);
 
     public List<Character> findByAge(Integer age);
 
-   public List<Character> findByMovies(String id);
+    public List<Character> findByMovies(String id);
 }
