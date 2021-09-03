@@ -4,6 +4,7 @@ import challenge.disney.movie.Movie;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.jsonschema.JsonSerializableSchema;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.*;
 import org.springframework.data.jpa.repository.Query;
 
