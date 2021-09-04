@@ -50,11 +50,12 @@ public class CharacterController {
     @DeleteMapping(value = "{id}")
     public ResponseEntity<CharacterDto> deleteCharacter(@PathVariable final Long id){
 
-        Character character = characterService.deleteCharacter(id);
         // hmmmmm..... invention
 //        for(Movie movies: character.getMovies()){
 //            characterService.deleteCharacter(movies.getId());
 //        }
+        Character character = characterService.deleteCharacter(id);
+
 
 
         return new ResponseEntity<>(CharacterDto.from(character),HttpStatus.OK);

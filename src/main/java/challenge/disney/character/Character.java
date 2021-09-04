@@ -28,7 +28,7 @@ public class Character {
     private String story;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "characters")
+    @ManyToMany(mappedBy = "characters", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //    @OneToMany(
 //            cascade = CascadeType.ALL)
 //    @JoinColumn(name = "movies_id")
