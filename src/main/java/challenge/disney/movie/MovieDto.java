@@ -18,7 +18,7 @@ public class MovieDto {
     private Date date;
     private Integer rating;
     private Genre genre;
-    private Character character;
+    private List<Character> character;
 
 //    private CharacterDto
 //            characters;

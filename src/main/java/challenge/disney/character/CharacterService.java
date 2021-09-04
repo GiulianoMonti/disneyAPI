@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -69,12 +70,12 @@ public class CharacterService {
     public Character addMovieToCharacter(Long characterId, Long movieId){
         Character character = getCharacter(characterId);
         Movie movie = movieService.getMovie(movieId);
-        if(Objects.nonNull(movie.getCharacters())){
-            throw new MovieIsAlreadyAssignedException(movieId,
-                    movie.getCharacters().getId());
-        }
+//        if(Objects.nonNull(movie.getCharacters())){
+//            throw new MovieIsAlreadyAssignedException(movieId,
+//                    movie.getCharacters().getId());
+//        }
         character.addMovies(movie);
-        movie.setCharacters(character);
+        movie.setCharacters(Collections.singletonList(character));
         return character;
     }
 

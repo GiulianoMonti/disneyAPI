@@ -30,7 +30,7 @@ public class CharacterController {
     }
 
     // add movie to character
-    @PostMapping(value="{characterId}/movies/{movieId}/add")
+    @PostMapping(value="{characterId}/movie/{movieId}/add")
     public ResponseEntity<CharacterDto> addMovieToCharacter(@PathVariable final Long movieId,
                                                         @PathVariable final Long characterId){
 
@@ -39,7 +39,7 @@ public class CharacterController {
     }
 
     // delete movie from character
-    @DeleteMapping(value="{characterId}/movies/{movieId}/remove")
+    @DeleteMapping(value="{characterId}/movie/{movieId}/remove")
     public ResponseEntity<CharacterDto> deleteMovieFromCharacter(@PathVariable final Long movieId,
                                                             @PathVariable final Long characterId){
         Character character = characterService.removeMovieFromCharacter(movieId, characterId);

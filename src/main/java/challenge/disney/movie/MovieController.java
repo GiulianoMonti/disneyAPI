@@ -1,11 +1,14 @@
 package challenge.disney.movie;
 
 
+import challenge.disney.character.Character;
+import challenge.disney.character.CharacterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +36,22 @@ public class MovieController {
         return new ResponseEntity<>(moviesDtoFilter,HttpStatus.OK);
     }
 
+    // list
+    @GetMapping("/list")
+    public ResponseEntity<List<MovieDto>> getMovieList() {
+        List<Movie> movies =movieService.getMovies();
+
+        List<MovieDto> movieDto;
+        List<MovieDto> list = new ArrayList<>();
+        for (Movie movie : movies) {
+            MovieDto from = MovieDto.from(movie);
+            list.add(from);
+        }
+        movieDto = list;
+        return new ResponseEntity<>(movieDto,HttpStatus.OK);
+
+    }
+
     @GetMapping(value = "{id}")
     public ResponseEntity<MovieDto> getMovie(@PathVariable final Long id){
         Movie movie = movieService.getMovie(id);
@@ -52,6 +71,14 @@ public class MovieController {
         return new ResponseEntity<>(MovieDto.from(movie),HttpStatus.OK);
 
     }
+        @PostMapping(value="{movieId}/genre/{genreId}/add")
+    public ResponseEntity<MovieDto> addMovieToCharacter(@PathVariable final Long movieId,
+                                                        @PathVariable final Long genreId){
+        Movie movie = movieService.addGenreToMovie(movieId,genreId);
+
+        return new ResponseEntity<>(MovieDto.from(movie),HttpStatus.OK);
+    }
+
 
 //    @PostMapping(value="{movieId}/character/{characterId}/add")
 //    public ResponseEntity<MovieDto> addMovieToCharacter(@PathVariable final Long movieId,

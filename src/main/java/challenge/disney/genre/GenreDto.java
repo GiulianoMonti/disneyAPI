@@ -19,7 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Data
-public class Genre {
+public class GenreDto {
     @Id
     @GeneratedValue
     private Long id;
@@ -28,22 +28,16 @@ public class Genre {
 
     @JsonIgnore
     @OneToMany(mappedBy = "genre")
-    private List<Movie> movies = new ArrayList<>();
+    private List<Movie> movie = new ArrayList<>();
 
-    public void addMovies(Movie movie) {
-        movies.add(movie);
-    }
 
-    public void removeMovies(Movie movie) {
-        movies.remove(movie);
-    }
+    public static GenreDto from(Genre genre){
+        GenreDto genreDto = new GenreDto();
+        genreDto.setId(genre.getId());
+        genreDto.setName(genre.getName());
+        genreDto.setImage(genre.getImage());
 
-    public static Genre from(GenreDto genreDto){
-        Genre genre = new Genre();
-        genre.setId(genreDto.getId());
-        genre.setName(genreDto.getName());
-        genre.setImage(genreDto.getImage());
-        return genre;
+        return genreDto;
     }
 
 }

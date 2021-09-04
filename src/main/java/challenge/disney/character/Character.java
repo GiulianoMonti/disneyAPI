@@ -28,10 +28,10 @@ public class Character {
     private String story;
 
     @JsonIgnore
-//    @ManyToMany(mappedBy = "characters")
-    @OneToMany(
-            cascade = CascadeType.ALL)
-    @JoinColumn(name = "movies_id")
+    @ManyToMany(mappedBy = "characters")
+//    @OneToMany(
+//            cascade = CascadeType.ALL)
+//    @JoinColumn(name = "movies_id")
     private List<Movie> movies = new ArrayList<>();
 
 
