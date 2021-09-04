@@ -46,6 +46,7 @@ public class CharacterController {
         return new ResponseEntity<>(CharacterDto.from(character), HttpStatus.OK);
     }
 
+
     @DeleteMapping(value = "{id}")
     public ResponseEntity<CharacterDto> deleteCharacter(@PathVariable final Long id){
 
@@ -76,15 +77,15 @@ public class CharacterController {
 
         return new ResponseEntity<>(charactersDto,HttpStatus.OK);
     }
-
-    @GetMapping(params = "idMovie")
-    public ResponseEntity<List<CharacterDto>> getCharacterByAge(@RequestParam(value = "idMovie", required = false) String idMovie){
-        List<Character> characters =characterService.getCharacterByMovie(idMovie);
-
-        List<CharacterDto> charactersDto = characters.stream().map(CharacterDto::from).collect(Collectors.toList());
-
-        return new ResponseEntity<>(charactersDto,HttpStatus.OK);
-    }
+//
+//    @GetMapping(params = "idMovie")
+//    public ResponseEntity<List<CharacterDto>> getCharacterByAge(@RequestParam(value = "idMovie", required = false) String idMovie){
+//        List<Character> characters =characterService.getCharacterByMovie(idMovie);
+//
+//        List<CharacterDto> charactersDto = characters.stream().map(CharacterDto::from).collect(Collectors.toList());
+//
+//        return new ResponseEntity<>(charactersDto,HttpStatus.OK);
+//    }
 
 
     @GetMapping
@@ -118,9 +119,6 @@ public class CharacterController {
         return new ResponseEntity<>(CharacterDto.from(character),HttpStatus.OK);
 
     }
-
-
-
 
     @PutMapping(value = "{id}")
     public ResponseEntity<CharacterDto> editItem(@PathVariable final Long id,

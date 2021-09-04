@@ -1,38 +1,36 @@
 package challenge.disney.movie;
 
 import challenge.disney.character.Character;
-import challenge.disney.character.CharacterDto;
 import challenge.disney.genre.Genre;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.data.jpa.repository.Temporal;
 
-import javax.persistence.*;
-import java.util.*;
-import java.util.stream.Collectors;
+import javax.persistence.TemporalType;
+import java.util.Date;
 
 @Data
-public class MovieDto {
+public class MovieDtoFilter {
 
     private Long id;
     private String image;
     private String title;
+
+    @JsonFormat(pattern="yyyy/MM/dd")
     private Date date;
-    private Integer rating;
-    private Genre genre;
-    private Character character;
+
 
 //    private CharacterDto
 //            characters;
 
 
-    public static MovieDto from(Movie movie) {
-        MovieDto movieDto = new MovieDto();
+    public static MovieDtoFilter from(Movie movie) {
+        MovieDtoFilter movieDto = new MovieDtoFilter();
         movieDto.setId(movie.getId());
         movieDto.setImage(movie.getImage());
         movieDto.setTitle(movie.getTitle());
         movieDto.setDate(movie.getDate());
-        movieDto.setRating(movie.getRating());
-        movieDto.setGenre(movie.getGenre());
-        movieDto.setCharacter(movie.getCharacters());
+
 //        List<CharacterDto> list = new ArrayList<>();
 //        for (Character character : movie.getCharacters()) {
 //            CharacterDto from = CharacterDto.from(character);

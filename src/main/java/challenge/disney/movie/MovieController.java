@@ -27,10 +27,10 @@ public class MovieController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MovieDto>> getMovies() {
+    public ResponseEntity<List<MovieDtoFilter>> getMovies() {
         List<Movie> movies = movieService.getMovies();
-        List<MovieDto> moviesDto = movies.stream().map(MovieDto::from).collect(Collectors.toList());
-        return new ResponseEntity<>(moviesDto,HttpStatus.OK);
+        List<MovieDtoFilter> moviesDtoFilter = movies.stream().map(MovieDtoFilter::from).collect(Collectors.toList());
+        return new ResponseEntity<>(moviesDtoFilter,HttpStatus.OK);
     }
 
     @GetMapping(value = "{id}")
