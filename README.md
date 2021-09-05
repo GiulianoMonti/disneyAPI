@@ -1,3 +1,5 @@
+
+
 disneyAPI
 
 Disney API alkemy challenge POSTMAN para todo
@@ -6,13 +8,23 @@ Disney API alkemy challenge POSTMAN para todo
 
 2 autenticacion de usuarios - trying to add register and login..
 
-http://localhost:8080/auth {
+http://localhost:8080/auth/register {
 
-"username":"alkemy",
+"username":"",
 
-"password":"alkemy"
+"password":""
 
 }
+
+http://localhost:8080/auth/login {
+
+"username":"",
+
+"password":""
+
+}
+
+get token
 
 headers: Authorization = Bearer token#####
 
