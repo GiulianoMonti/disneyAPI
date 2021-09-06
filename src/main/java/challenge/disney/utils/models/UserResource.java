@@ -3,6 +3,7 @@ package challenge.disney.utils.models;
 
 import challenge.disney.utils.JwtUtil;
 import challenge.disney.utils.services.MyUserDetailService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,7 +32,6 @@ public class UserResource {
 //    public String hello(){
 //        return "hello world";
 //    }
-
 
 
     @RequestMapping(value = "/auth/login", method = RequestMethod.POST)

@@ -23,8 +23,9 @@ public class CharacterController {
         this.characterService = characterService;
     }
 
+
     @PostMapping
-    public ResponseEntity<CharacterDto> addItem(@RequestBody final CharacterDto characterDto) {
+    public ResponseEntity<CharacterDto> addCharacter(@RequestBody final CharacterDto characterDto) {
         Character character = characterService.addCharacter(Character.from(characterDto));
         return new ResponseEntity<>(CharacterDto.from(character), HttpStatus.OK);
     }
@@ -94,6 +95,10 @@ public class CharacterController {
         List<Character> characters =characterService.getCharacters();
 
         List<CharacterDtoFilter> charactersDto = characters.stream().map(CharacterDtoFilter::from).collect(Collectors.toList());
+        if(charactersDto.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
         return new ResponseEntity<>(charactersDto,HttpStatus.OK);
     }
 
@@ -122,7 +127,7 @@ public class CharacterController {
     }
 
     @PutMapping(value = "{id}")
-    public ResponseEntity<CharacterDto> editItem(@PathVariable final Long id,
+    public ResponseEntity<CharacterDto> editCharacter(@PathVariable final Long id,
                                                  @RequestBody final CharacterDto characterDto){
 
         Character editedCharacter = characterService.editCharacter(id,Character.from(characterDto));

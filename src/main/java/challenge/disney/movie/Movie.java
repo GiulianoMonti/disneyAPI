@@ -28,7 +28,7 @@ public class Movie {
     @JoinColumn(name = "genre_id", referencedColumnName = "id")
     private Genre genre;
 
-        @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "characters_and_movies",
             joinColumns = @JoinColumn(name = "movie_id"),
@@ -36,7 +36,7 @@ public class Movie {
     )
     @JsonIgnore
 //    @ManyToOne
-    private List<Character> characters= new ArrayList<>();
+    private List<Character> characters = new ArrayList<>();
 
 
     public static Movie from(MovieDto movieDto) {
@@ -47,14 +47,4 @@ public class Movie {
         movie.setRating(movieDto.getRating());
         return movie;
     }
-
-
-
-//    public void addCharacters(Character character) {
-//        characters.add(character);
-//    }
-
-//    public void assignGenre(Genre genre) {
-//        this.genre = genre;
-//    }
 }

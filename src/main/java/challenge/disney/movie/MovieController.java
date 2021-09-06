@@ -33,13 +33,13 @@ public class MovieController {
     public ResponseEntity<List<MovieDtoFilter>> getMovies() {
         List<Movie> movies = movieService.getMovies();
         List<MovieDtoFilter> moviesDtoFilter = movies.stream().map(MovieDtoFilter::from).collect(Collectors.toList());
-        return new ResponseEntity<>(moviesDtoFilter,HttpStatus.OK);
+        return new ResponseEntity<>(moviesDtoFilter, HttpStatus.OK);
     }
 
     // list
     @GetMapping("/list")
     public ResponseEntity<List<MovieDto>> getMovieList() {
-        List<Movie> movies =movieService.getMovies();
+        List<Movie> movies = movieService.getMovies();
 
         List<MovieDto> movieDto;
         List<MovieDto> list = new ArrayList<>();
@@ -48,77 +48,40 @@ public class MovieController {
             list.add(from);
         }
         movieDto = list;
-        return new ResponseEntity<>(movieDto,HttpStatus.OK);
+        return new ResponseEntity<>(movieDto, HttpStatus.OK);
 
     }
 
     @GetMapping(value = "{id}")
-    public ResponseEntity<MovieDto> getMovie(@PathVariable final Long id){
+    public ResponseEntity<MovieDto> getMovie(@PathVariable final Long id) {
         Movie movie = movieService.getMovie(id);
-        return new ResponseEntity<>(MovieDto.from(movie),HttpStatus.OK);
+        return new ResponseEntity<>(MovieDto.from(movie), HttpStatus.OK);
 
     }
+
     @DeleteMapping(value = "{id}")
-    public ResponseEntity<MovieDto> deleteMovie(@PathVariable final Long id){
+    public ResponseEntity<MovieDto> deleteMovie(@PathVariable final Long id) {
         Movie movie = movieService.deleteMovie(id);
-        return new ResponseEntity<>(MovieDto.from(movie),HttpStatus.OK);
+        return new ResponseEntity<>(MovieDto.from(movie), HttpStatus.OK);
 
     }
+
     @PutMapping(value = "{id}")
     public ResponseEntity<MovieDto> editMovie(@PathVariable final Long id,
-                                              @RequestBody final MovieDto movieDto){
+                                              @RequestBody final MovieDto movieDto) {
         Movie movie = movieService.editMovie(id, Movie.from(movieDto));
-        return new ResponseEntity<>(MovieDto.from(movie),HttpStatus.OK);
+        return new ResponseEntity<>(MovieDto.from(movie), HttpStatus.OK);
 
     }
-        @PostMapping(value="{movieId}/genre/{genreId}/add")
-    public ResponseEntity<MovieDto> addMovieToCharacter(@PathVariable final Long movieId,
-                                                        @PathVariable final Long genreId){
-        Movie movie = movieService.addGenreToMovie(movieId,genreId);
 
-        return new ResponseEntity<>(MovieDto.from(movie),HttpStatus.OK);
+    @PostMapping(value = "{movieId}/genre/{genreId}/add")
+    public ResponseEntity<MovieDto> addGenreToMovie(@PathVariable final Long movieId,
+                                                    @PathVariable final Long genreId) {
+        Movie movie = movieService.addGenreToMovie(movieId, genreId);
+
+        return new ResponseEntity<>(MovieDto.from(movie), HttpStatus.OK);
     }
-
-
-//    @PostMapping(value="{movieId}/character/{characterId}/add")
-//    public ResponseEntity<MovieDto> addMovieToCharacter(@PathVariable final Long movieId,
-//                                                        @PathVariable final Long characterId){
-//        Movie movie = movieService.addMovieToCharacter(movieId,characterId);
-//
-//        return new ResponseEntity<>(MovieDto.from(movie),HttpStatus.OK);
-//    }
-//
-//    @DeleteMapping(value="{movieId}/character/{characterId}/remove")
-//    public ResponseEntity<MovieDto> removeMovieFromCharacter(@PathVariable final Long movieId,
-//                                                        @PathVariable final Long characterId){
-//        Movie movie = movieService.removeMovieFromCharacter(movieId,characterId);
-//
-//        return new ResponseEntity<>(MovieDto.from(movie),HttpStatus.OK);
-//    }
 
 
 }
-
-
-//    @PutMapping("/{movieId}/characters/{characterId}")
-//    Movie addCharactersToMovies(
-//            @PathVariable Long movieId,
-//            @PathVariable Long characterId
-//    ) {
-//        Movie movie = movieRepository.findById(movieId).get();
-//        Character character = characterRepository.findById(characterId).get();
-//        movie.addCharacters(character);
-//        return movieRepository.save(movie);
-//    }
-
-//    @PutMapping("/{movieId}/genres/{genreId}")
-//    Movie assignMovieToGenre(
-//            @PathVariable Long movieId,
-//            @PathVariable Long genreId
-//    ) {
-//        Movie movie = movieRepository.findById(movieId).get();
-//        Genre genre  = genreRepository.findById(genreId).get();
-//        movie.assignGenre(genre);
-//        return movieRepository.save(movie);
-//    }
 
