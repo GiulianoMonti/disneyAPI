@@ -79,15 +79,15 @@ public class CharacterController {
 
         return new ResponseEntity<>(charactersDto,HttpStatus.OK);
     }
-//
-//    @GetMapping(params = "idMovie")
-//    public ResponseEntity<List<CharacterDto>> getCharacterByAge(@RequestParam(value = "idMovie", required = false) String idMovie){
-//        List<Character> characters =characterService.getCharacterByMovie(idMovie);
-//
-//        List<CharacterDto> charactersDto = characters.stream().map(CharacterDto::from).collect(Collectors.toList());
-//
-//        return new ResponseEntity<>(charactersDto,HttpStatus.OK);
-//    }
+
+    @GetMapping(params = "movie")
+    public ResponseEntity<List<CharacterDto>> getByName(@RequestParam(value = "movie") Long idMovie){
+        List<Character> characters =characterService.getCharacterByMovie(idMovie);
+
+        List<CharacterDto> charactersDto = characters.stream().map(CharacterDto::from).collect(Collectors.toList());
+
+        return new ResponseEntity<>(charactersDto,HttpStatus.OK);
+    }
 
 
     @GetMapping

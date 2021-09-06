@@ -28,15 +28,10 @@ public class Movie {
     @JoinColumn(name = "genre_id", referencedColumnName = "id")
     private Genre genre;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "characters_and_movies",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "character_id")
-    )
+    @ManyToMany(mappedBy = "movies")
     @JsonIgnore
 //    @ManyToOne
-    private List<Character> characters = new ArrayList<>();
+    private List<Character> characters= new ArrayList<>();
 
 
     public static Movie from(MovieDto movieDto) {

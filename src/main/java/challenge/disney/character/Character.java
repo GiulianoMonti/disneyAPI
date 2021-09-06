@@ -28,10 +28,12 @@ public class Character {
     private String story;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "characters", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //    @OneToMany(
 //            cascade = CascadeType.ALL)
-//    @JoinColumn(name = "movies_id")
+    @JoinTable(name = "characters_movies",
+            joinColumns = @JoinColumn(name = "character_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private List<Movie> movies = new ArrayList<>();
 
 

@@ -15,5 +15,6 @@ public interface CharacterRepository extends JpaRepository<Character, Long> {
 
     public List<Character> findByAge(Integer age);
 
-    public List<Character> findByMovies(String id);
+    @Query("select distinct t from Character t join t.movies u where u.id = :id")
+    public List<Character> findByMovies(Long id);
 }

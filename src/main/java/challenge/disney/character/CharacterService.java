@@ -46,7 +46,7 @@ public class CharacterService {
         return repo.findByAge(age);
     }
 
-    public List<Character> getCharacterByMovie(String idMovie){
+    public List<Character> getCharacterByMovie(Long idMovie){
         return repo.findByMovies(idMovie);
     }
 
