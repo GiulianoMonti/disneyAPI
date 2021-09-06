@@ -55,8 +55,8 @@ public class MovieService {
     @Transactional
     public Movie editMovie(Long id, Movie movie){
         Movie movieToEdit = getMovie(id);
-        movieToEdit.setTitle(movie.getTitle());
-        return movieToEdit;
+
+        return movieRepository.save(movieToEdit);
     }
 
     @Transactional

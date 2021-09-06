@@ -62,12 +62,9 @@ public class CharacterService {
     @Transactional
     public Character editCharacter(Long id,Character character){
         Character characterToEdit = getCharacter(id);
-        characterToEdit.setName(character.getName());
-        characterToEdit.setImage(character.getImage());
-        characterToEdit.setAge(character.getAge());
-        characterToEdit.setStory(character.getStory());
-        characterToEdit.setWeight(character.getWeight());
-        return characterToEdit;
+
+
+        return repo.save(characterToEdit);
     }
 
     @Transactional
