@@ -34,6 +34,6 @@ headers: Authorization = Bearer token#####
 
 5 pj details - ok
 
-6 busqueda pj - 2/3 cannot by movieId yet
+6 busqueda pj - ok
 
-7
+added swagger and authorize header
