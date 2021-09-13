@@ -3,9 +3,11 @@ package challenge.disney.movie;
 import challenge.disney.character.Character;
 import challenge.disney.character.CharacterDto;
 import challenge.disney.genre.Genre;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -15,13 +17,10 @@ public class MovieDto {
     private Long id;
     private String image;
     private String title;
-    private Date date;
+    private LocalDate date;
     private Integer rating;
     private Genre genre;
-    private List<Character> character;
-
-//    private CharacterDto
-//            characters;
+    private List<Character> character=new ArrayList<>();
 
 
     public static MovieDto from(Movie movie) {

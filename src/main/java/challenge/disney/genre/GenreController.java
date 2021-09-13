@@ -15,23 +15,22 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/genres")
 public class GenreController {
-    @Autowired
-    GenreRepository genreRepository;
+    private final GenreRepository genreRepository;
 
-    @Autowired
     private final GenreService genreService;
-
-    public GenreController(GenreService genreService) {
+    @Autowired
+    public GenreController(GenreService genreService,GenreRepository genreRepository) {
         this.genreService = genreService;
+        this.genreRepository = genreRepository;
     }
 
     @PostMapping
-    public ResponseEntity<GenreDto> addItem(@RequestBody final GenreDto genreDto) {
+    public ResponseEntity<GenreDto> addGenre(@RequestBody final GenreDto genreDto) {
         Genre genre = genreService.addGenre(Genre.from(genreDto));
         return new ResponseEntity<>(GenreDto.from(genre), HttpStatus.OK);
     }
     @GetMapping
-    public ResponseEntity<List<GenreDto>> getCharacters() {
+    public ResponseEntity<List<GenreDto>> getGenres() {
         List<Genre> genres =genreService.getGenres();
 
         List<GenreDto> genresDto = genres.stream().map(GenreDto::from).collect(Collectors.toList());

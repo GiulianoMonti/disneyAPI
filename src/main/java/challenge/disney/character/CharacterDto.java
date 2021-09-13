@@ -1,9 +1,11 @@
 package challenge.disney.character;
 
 import challenge.disney.movie.Movie;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.data.jpa.repository.Query;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +18,8 @@ public class CharacterDto {
     private Integer age;
     private Integer weight;
     private String story;
-    private List <Movie> movie;
+
+    private List <Movie> movie = new ArrayList<>();
 
     public static CharacterDto from(Character character){
         CharacterDto characterDto = new CharacterDto();

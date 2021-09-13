@@ -7,6 +7,7 @@ import lombok.Data;
 import org.springframework.data.jpa.repository.Temporal;
 
 import javax.persistence.TemporalType;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -16,8 +17,7 @@ public class MovieDtoFilter {
     private String image;
     private String title;
 
-    @JsonFormat(pattern="yyyy/MM/dd")
-    private Date date;
+    private LocalDate date;
 
 
 //    private CharacterDto

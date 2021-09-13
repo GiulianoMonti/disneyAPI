@@ -11,8 +11,12 @@ import java.util.stream.StreamSupport;
 
 @Service
 public class GenreService {
-    @Autowired
     GenreRepository genreRepository;
+
+    @Autowired
+    public GenreService(GenreRepository genreRepository) {
+        this.genreRepository = genreRepository;
+    }
 
     public Genre addGenre(Genre genre){
         return  genreRepository.save(genre);

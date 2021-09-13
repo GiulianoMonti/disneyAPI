@@ -27,7 +27,7 @@ public class CharacterController {
     @PostMapping
     public ResponseEntity<CharacterDto> addCharacter(@RequestBody final CharacterDto characterDto) {
         Character character = characterService.addCharacter(Character.from(characterDto));
-        return new ResponseEntity<>(CharacterDto.from(character), HttpStatus.OK);
+        return new ResponseEntity<>(CharacterDto.from(character), HttpStatus.CREATED);
     }
 
     // add movie to character
@@ -137,16 +137,6 @@ public class CharacterController {
 
 
 }
-
-//    @DeleteMapping(path = "delete/{id}")
-//    public String delete(@PathVariable("id") Integer id){
-//        try {
-//            characterService.delete(id);
-//            return "Character was deleted id: " + id;
-//        } catch (Exception e) {
-//            return "Character cannot deleted id: " + id;
-//        }
-//    }
 
 
 

@@ -2,17 +2,21 @@ package challenge.disney.movie;
 
 import challenge.disney.character.Character;
 import challenge.disney.genre.Genre;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.*;
 
-@NoArgsConstructor
-@Entity
 @Data
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Movie {
 
     @Id
@@ -21,16 +25,19 @@ public class Movie {
 
     private String image;
     private String title;
-    private Date date;
+
+    private LocalDate date;
     private Integer rating;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "genre_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "genre_id")
     private Genre genre;
 
-    @ManyToMany(mappedBy = "movies")
     @JsonIgnore
-//    @ManyToOne
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(name = "characters_movies",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "character_id"))
     private List<Character> characters= new ArrayList<>();
 
 
@@ -40,6 +47,8 @@ public class Movie {
         movie.setTitle(movieDto.getTitle());
         movie.setDate(movieDto.getDate());
         movie.setRating(movieDto.getRating());
+        movie.setGenre(movieDto.getGenre());
+        movie.setCharacters(movieDto.getCharacter());
         return movie;
     }
 }
