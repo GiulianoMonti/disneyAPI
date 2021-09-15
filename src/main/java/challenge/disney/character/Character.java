@@ -36,6 +36,15 @@ public class Character {
             inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private List<Movie> movies = new ArrayList<>();
 
+    public Character(String image, String name, Integer age, Integer weight, String story, List<Movie> movies) {
+        this.image = image;
+        this.name = name;
+        this.age = age;
+        this.weight = weight;
+        this.story = story;
+        this.movies = movies;
+    }
+
 
     public void addMovies(Movie movie) {
         movies.add(movie);
@@ -52,7 +61,7 @@ public class Character {
         character.setAge(characterDto.getAge());
         character.setWeight(characterDto.getWeight());
         character.setStory(characterDto.getStory());
-        character.setMovies(characterDto.getMovie());
+        character.setMovies(characterDto.getMovies());
         return character;
     }
 }

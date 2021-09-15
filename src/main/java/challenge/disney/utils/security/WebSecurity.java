@@ -44,4 +44,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         filter.setFilterProcessesUrl("/auth/login");
         return filter;
     }
+    @Override
+    public void configure(org.springframework.security.config.annotation.web.builders.WebSecurity web)  {
+        web.ignoring().antMatchers("/v2/api-docs/**",
+                "/swagger-ui.html",
+                "/swagger-ui/**","/swagger-resources/**","/h2","/console/**");
+    }
+
 }

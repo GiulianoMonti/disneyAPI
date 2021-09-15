@@ -1,56 +1,78 @@
 package challenge.disney.character;
 
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import java.util.*;
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@AutoConfigureMockMvc(addFilters = false)
-@Import(CharacterController.class)
-@WebMvcTest(controllers = CharacterController.class)
-public class CharacterControllerTest {
+class CharacterControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @MockBean
-    private CharacterRepository characterRepository;
+    @InjectMocks
+    CharacterController characterController;
 
 
+    @Mock
+    CharacterService characterService;
 
 
-    @MockBean
-    private CharacterService characterService;
+    CharacterDto characterDto;
+    Character character;
 
-    Character character1 = new Character(1L, "takeshi", "kovacs", 20, 76, "story", new ArrayList<>());
-    List<Character> listCharacters = Arrays.asList(character1);
-    @Test
-    public void testGetCharacters() throws Exception {
 
-        when(characterService.getCharacters()).thenReturn(listCharacters);
+    final String CHARACTER_NAME = "takeshi";
+    List<Character> characters = new ArrayList<>();
 
-        mockMvc.perform(get("/characters"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$",hasSize(2)));
+    @BeforeEach
+    void setUp()throws Exception{
+
+        MockitoAnnotations.initMocks(this);
+        character = new Character();
+        character.setImage("Url1");
+        character.setName("takeshi");
+        character.setAge(33);
+        character.setWeight(77);
+        character.setStory("cyberpunk");
+
+        characters.add(character);
+
     }
 
+    @Test
+    void getCharacterByName() {
+        characterDto = new CharacterDto();
+
+        when(characterService.getCharacterByName(anyString())).thenReturn(characters);
+        ResponseEntity<List<CharacterDto>> characs = characterController.getCharacterByName(CHARACTER_NAME);
+        assertNotNull(characs);
+
+        // comparando 2 cosas distintas
+        //
+        // invento ...
+
+        assertEquals(characters.size(), Objects.requireNonNull(characs.getBody()).size());
+
+
+        assertEquals(characters.get(0).getImage(),characs.getBody().get(0).getImage());
+
+        assertEquals(characters.get(0).getName(),characs.getBody().get(0).getName());
+
+    }
 }

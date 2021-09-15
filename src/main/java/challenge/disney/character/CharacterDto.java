@@ -19,7 +19,7 @@ public class CharacterDto {
     private Integer weight;
     private String story;
 
-    private List <Movie> movie = new ArrayList<>();
+    private List <Movie> movies = new ArrayList<>();
 
     public static CharacterDto from(Character character){
         CharacterDto characterDto = new CharacterDto();
@@ -29,7 +29,7 @@ public class CharacterDto {
         characterDto.setAge(character.getAge());
         characterDto.setWeight(character.getWeight());
         characterDto.setStory(character.getStory());
-        characterDto.setMovie(character.getMovies());
+        characterDto.setMovies(character.getMovies());
         return characterDto;
     }
 }

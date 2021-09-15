@@ -29,6 +29,12 @@ public class Genre {
     @OneToMany(mappedBy = "genre",cascade=CascadeType.MERGE)
     private List<Movie> movies = new ArrayList<>();
 
+    public Genre(String name, String image, List<Movie> movies) {
+        this.name = name;
+        this.image = image;
+        this.movies = movies;
+    }
+
     public void addMovies(Movie movie) {
         movies.add(movie);
     }

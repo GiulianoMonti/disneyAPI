@@ -29,7 +29,7 @@ public class Movie {
     private LocalDate date;
     private Integer rating;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.MERGE)
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
