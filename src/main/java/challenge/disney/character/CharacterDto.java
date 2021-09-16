@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+
 public class CharacterDto {
     private Long id;
 
@@ -20,6 +21,7 @@ public class CharacterDto {
     private String story;
 
     private List <Movie> movies = new ArrayList<>();
+
 
     public static CharacterDto from(Character character){
         CharacterDto characterDto = new CharacterDto();
@@ -32,4 +34,5 @@ public class CharacterDto {
         characterDto.setMovies(character.getMovies());
         return characterDto;
     }
+
 }

@@ -2,6 +2,7 @@ package challenge.disney.utils.service.impl;
 
 import challenge.disney.utils.repositories.UserRepository;
 import challenge.disney.utils.entity.UserEntity;
+import challenge.disney.utils.service.EmailService;
 import challenge.disney.utils.service.UserService;
 import challenge.disney.utils.shared.Utils;
 import challenge.disney.utils.shared.dto.UserDto;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 
 @Service
@@ -27,8 +29,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    private EmailService emailService;
+
     @Override
-    public UserDto createUser(UserDto user) {
+    public UserDto createUser(UserDto user) throws MessagingException {
 
         if (userRepository.findByEmail(user.getEmail()) != null) throw new RuntimeException("Record already exists");
 
@@ -38,7 +43,7 @@ public class UserServiceImpl implements UserService {
         String publicUserId = utils.generateUserId(30);
         userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userEntity.setUserId(publicUserId);
-
+        emailService.sendNewPasswordEmail(user.getFirstName(), user.getPassword(), user.getEmail());
         UserEntity storedUserDetails = userRepository.save(userEntity);
         UserDto returnValue = new UserDto();
         BeanUtils.copyProperties(storedUserDetails, returnValue);

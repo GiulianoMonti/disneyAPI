@@ -2,7 +2,6 @@ package challenge.disney.character;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -18,7 +17,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -63,9 +64,12 @@ class CharacterControllerTest {
         ResponseEntity<List<CharacterDto>> characs = characterController.getCharacterByName(CHARACTER_NAME);
         assertNotNull(characs);
 
+
         // comparando 2 cosas distintas
         //
         // invento ...
+
+
 
         assertEquals(characters.size(), Objects.requireNonNull(characs.getBody()).size());
 
