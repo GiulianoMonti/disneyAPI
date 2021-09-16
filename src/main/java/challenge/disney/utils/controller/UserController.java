@@ -8,7 +8,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.MessagingException;
 
 @RestController
 @RequestMapping("auth")
@@ -18,7 +17,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/register")
-    public UserRest createUser(@RequestBody UserDetailsRequestModel requestUserDetails) throws MessagingException {
+    public UserRest createUser(@RequestBody UserDetailsRequestModel requestUserDetails) {
         UserRest returnValue = new UserRest();
 
         UserDto userDto = new UserDto();
