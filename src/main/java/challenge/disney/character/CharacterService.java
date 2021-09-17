@@ -29,9 +29,7 @@ public class CharacterService {
     }
 
     public List<Character> getCharacters(){
-        return StreamSupport
-                .stream(repo.findAll().spliterator(), false)
-                .collect(Collectors.toList());
+        return repo.findAll();
     }
 
 

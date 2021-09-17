@@ -16,8 +16,9 @@ import java.io.IOException;
 @Service
 public class SendGridService {
 
-    @Value("${app.sendgrid.templateId}")
-    private String templateId;
+//    @Value("${app.sendgrid.templateId}")
+
+    private String TEMPLATE_ID="d-16c05943a8f64e25b405a5d89e824220";
     @Autowired
     SendGrid sendGrid;
     public String sendEmail(String email)  {
@@ -70,7 +71,7 @@ public class SendGridService {
         personalization.addTo(to);
         mail.addPersonalization(personalization);
 
-        mail.setTemplateId(templateId);
+        mail.setTemplateId(TEMPLATE_ID);
 
         return mail;
     }

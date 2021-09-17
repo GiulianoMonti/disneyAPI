@@ -1,82 +1,69 @@
 package challenge.disney.character;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
 
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@WebAppConfiguration
+@ActiveProfiles(value = "test")
+@AutoConfigureMockMvc(addFilters = false)
 class CharacterControllerTest {
 
-    @InjectMocks
-    CharacterController characterController;
 
-
-    @Mock
+    @Autowired
+    CharacterController controller;
+    @MockBean
+    CharacterRepository characterRepository;
+    @MockBean
     CharacterService characterService;
-
-
-    CharacterDto characterDto;
-    Character character;
-
-
-    final String CHARACTER_NAME = "takeshi";
-    List<Character> characters = new ArrayList<>();
-
-    @BeforeEach
-    void setUp()throws Exception{
-
-        MockitoAnnotations.initMocks(this);
-        character = new Character();
-        character.setImage("Url1");
-        character.setName("takeshi");
-        character.setAge(33);
-        character.setWeight(77);
-        character.setStory("cyberpunk");
-
-        characters.add(character);
-
-    }
+    @Autowired
+    private MockMvc mockMvc;
 
     @Test
-    void getCharacterByName() {
-        characterDto = new CharacterDto();
+    void getByName() throws Exception {
+        List<Character> characters = new ArrayList<>();
+        characters.add(buildCharacter());
+        when(characterRepository.findByName(any())).thenReturn(characters);
+        this.mockMvc.perform(get("/characters").param("name","b"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()",is(0)));
+    }
 
-        when(characterService.getCharacterByName(anyString())).thenReturn(characters);
-        ResponseEntity<List<CharacterDto>> characs = characterController.getCharacterByName(CHARACTER_NAME);
-        assertNotNull(characs);
+    private Character buildCharacter() {
+        Character charac = new Character();
+        charac.setStory("a");
+        charac.setName("b");
+        charac.setWeight(11);
+        charac.setStory("prueba");
+        charac.setAge(111);
+        charac.setMovies(null);
 
-
-        // comparando 2 cosas distintas
-        //
-        // invento ...
-
-
-
-        assertEquals(characters.size(), Objects.requireNonNull(characs.getBody()).size());
-
-
-        assertEquals(characters.get(0).getImage(),characs.getBody().get(0).getImage());
-
-        assertEquals(characters.get(0).getName(),characs.getBody().get(0).getName());
-
+        return charac;
     }
 }
