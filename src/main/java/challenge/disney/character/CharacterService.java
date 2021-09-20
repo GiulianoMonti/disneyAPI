@@ -25,7 +25,9 @@ public class CharacterService {
     private MovieService movieService;
 
     public Character addCharacter(Character character){
-        return  repo.save(character);
+
+        repo.save(character);
+        return  character;
     }
 
     public List<Character> getCharacters(){

@@ -61,8 +61,18 @@
 //        return movies;
 //    }
 //
-//    @Override
+//    private List<Character> getCharacters() {
+//        List<Character>characters = new ArrayList<>();
+//
+//        Character characterOne = new Character();
+//characterOne.setName("takeshi");
+//            characters.add(characterOne);
+//            return characters;
+//    }
+//
+//
+//        @Override
 //    public void onApplicationEvent(ContextRefreshedEvent event) {
-//        movieRepository.saveAll(getMovies());
+//        characterRepository.saveAll(getCharacters());
 //    }
 //}
