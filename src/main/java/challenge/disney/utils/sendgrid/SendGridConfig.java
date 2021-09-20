@@ -13,7 +13,7 @@ public class SendGridConfig {
 
     @Bean
     public SendGrid getSendGrid(){
-        return new SendGrid("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");
+        return new SendGrid("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");
     }
 
 }

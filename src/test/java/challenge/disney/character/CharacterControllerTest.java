@@ -28,6 +28,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.annotation.PostConstruct;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @WebAppConfiguration
@@ -47,23 +49,12 @@ class CharacterControllerTest {
 
     @Test
     void getByName() throws Exception {
-        List<Character> characters = new ArrayList<>();
-        characters.add(buildCharacter());
-        when(characterRepository.findByName(any())).thenReturn(characters);
-        this.mockMvc.perform(get("/characters").param("name","b"))
-                .andDo(print()).andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()",is(0)));
+        mockMvc.perform(get("/characters"))
+                .andDo(print())
+                .andExpect(status().isNoContent());
     }
 
-    private Character buildCharacter() {
-        Character charac = new Character();
-        charac.setStory("a");
-        charac.setName("b");
-        charac.setWeight(11);
-        charac.setStory("prueba");
-        charac.setAge(111);
-        charac.setMovies(null);
 
-        return charac;
-    }
+
+
 }
