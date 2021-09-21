@@ -2,6 +2,8 @@ package challenge.disney.character;
 
 import challenge.disney.movie.Movie;
 import challenge.disney.movie.MovieDto;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -88,6 +90,7 @@ public class CharacterController {
 
         return new ResponseEntity<>(charactersDto,HttpStatus.OK);
     }
+
 
 
     @GetMapping

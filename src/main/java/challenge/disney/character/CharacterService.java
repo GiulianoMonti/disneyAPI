@@ -4,6 +4,7 @@ import challenge.disney.exception.CharacterNotFoundException;
 import challenge.disney.exception.MovieIsAlreadyAssignedException;
 import challenge.disney.movie.Movie;
 import challenge.disney.movie.MovieService;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-
+@NoArgsConstructor
 @Service
 public class CharacterService {
 
