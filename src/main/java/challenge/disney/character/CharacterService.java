@@ -25,44 +25,44 @@ public class CharacterService {
     @Autowired
     private MovieService movieService;
 
-    public Character addCharacter(Character character){
+    public Characters addCharacter(Characters character){
 
         repo.save(character);
         return  character;
     }
 
-    public List<Character> getCharacters(){
+    public List<Characters> getCharacters(){
         return repo.findAll();
     }
 
 
-    public Character getCharacter(Long id){
+    public Characters getCharacter(Long id){
         return repo.findById(id).orElseThrow(()->
                 new CharacterNotFoundException(id));
     }
-    public List<Character> getCharacterByName(String name){
+    public List<Characters> getCharacterByName(String name){
         return repo.findByName(name);
     }
-    public List<Character> getCharacterByAge(Integer age){
+    public List<Characters> getCharacterByAge(Integer age){
         return repo.findByAge(age);
     }
 
-    public List<Character> getCharacterByMovie(Long idMovie){
+    public List<Characters> getCharacterByMovie(Long idMovie){
         return repo.findByMovies(idMovie);
     }
 
 
 
-    public Character deleteCharacter(Long id){
-        Character character = getCharacter(id);
+    public Characters deleteCharacter(Long id){
+        Characters character = getCharacter(id);
         repo.delete(character);
         return character;
     }
 
     // edited and persisted in the database
     @Transactional
-    public Character editCharacter(Long id,Character character){
-        Character characterToEdit = getCharacter(id);
+    public Characters editCharacter(Long id,Characters character){
+        Characters characterToEdit = getCharacter(id);
         characterToEdit.setName(character.getName());
         characterToEdit.setMovies(character.getMovies());
         characterToEdit.setStory(character.getStory());
@@ -75,8 +75,8 @@ public class CharacterService {
     }
 
     @Transactional
-    public Character addMovieToCharacter(Long characterId, Long movieId){
-        Character character = getCharacter(characterId);
+    public Characters addMovieToCharacter(Long characterId, Long movieId){
+        Characters character = getCharacter(characterId);
         Movie movie = movieService.getMovie(movieId);
 //        if(Objects.nonNull(movie.getCharacters())){
 //            throw new MovieIsAlreadyAssignedException(movieId,
@@ -88,15 +88,15 @@ public class CharacterService {
     }
 
         @Transactional
-        public Character removeMovieFromCharacter(Long movieId, Long characterId){
-        Character character = getCharacter(characterId);
+        public Characters removeMovieFromCharacter(Long movieId, Long characterId){
+            Characters character = getCharacter(characterId);
         Movie movie = movieService.getMovie(movieId);
         character.removeMovies(movie);
         return character;
     }
 
     public Long getCharacterId(Long id){
-        Character character = getCharacter(id);
+        Characters character = getCharacter(id);
       return  character.getId();
 
     }

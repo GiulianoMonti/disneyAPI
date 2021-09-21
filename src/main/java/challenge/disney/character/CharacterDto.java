@@ -23,7 +23,7 @@ public class CharacterDto {
     private List <Movie> movies = new ArrayList<>();
 
 
-    public static CharacterDto from(Character character){
+    public static CharacterDto from(Characters character){
         CharacterDto characterDto = new CharacterDto();
         characterDto.setId(character.getId());
         characterDto.setImage(character.getImage());

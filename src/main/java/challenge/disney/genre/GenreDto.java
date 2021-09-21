@@ -1,6 +1,5 @@
 package challenge.disney.genre;
 
-import challenge.disney.character.Character;
 import challenge.disney.character.CharacterDto;
 import challenge.disney.movie.Movie;
 import com.fasterxml.jackson.annotation.JsonIgnore;

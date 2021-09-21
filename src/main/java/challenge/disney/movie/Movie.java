@@ -1,6 +1,6 @@
 package challenge.disney.movie;
 
-import challenge.disney.character.Character;
+import challenge.disney.character.Characters;
 import challenge.disney.genre.Genre;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,7 +38,7 @@ public class Movie {
     @JoinTable(name = "characters_movies",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "character_id"))
-    private List<Character> characters= new ArrayList<>();
+    private List<Characters> characters= new ArrayList<>();
 
 
     public static Movie from(MovieDto movieDto) {

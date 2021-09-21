@@ -14,7 +14,7 @@ public class CharacterDtoFilter {
     private String name;
 
 
-    public static CharacterDtoFilter from(Character character) {
+    public static CharacterDtoFilter from(Characters character) {
         CharacterDtoFilter characterDtoFilter = new CharacterDtoFilter();
         characterDtoFilter.setId(character.getId());
         characterDtoFilter.setName(character.getName());

@@ -1,6 +1,5 @@
 package challenge.disney.movie;
 
-import challenge.disney.character.Character;
 import challenge.disney.character.CharacterService;
 import challenge.disney.exception.MovieNotFoundException;
 import challenge.disney.genre.Genre;

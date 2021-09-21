@@ -7,13 +7,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CharacterRepository extends JpaRepository<Character, Long> {
+public interface CharacterRepository extends JpaRepository<Characters, Long> {
 
 
-    public List<Character> findByName(String name);
+    public List<Characters> findByName(String name);
 
-    public List<Character> findByAge(Integer age);
+    public List<Characters> findByAge(Integer age);
 
-    @Query("select distinct t from Character t join t.movies u where u.id = :id")
-    public List<Character> findByMovies(Long id);
+    @Query("select distinct t from Characters t join t.movies u where u.id = :id")
+    public List<Characters> findByMovies(Long id);
 }

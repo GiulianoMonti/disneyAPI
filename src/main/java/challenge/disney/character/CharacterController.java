@@ -28,7 +28,7 @@ public class CharacterController {
 
     @PostMapping
     public ResponseEntity<CharacterDto> addCharacter(@RequestBody final CharacterDto characterDto) {
-        Character character = characterService.addCharacter(Character.from(characterDto));
+        Characters character = characterService.addCharacter(Characters.from(characterDto));
         return new ResponseEntity<>(CharacterDto.from(character), HttpStatus.CREATED);
     }
 
@@ -37,7 +37,7 @@ public class CharacterController {
     public ResponseEntity<CharacterDto> addMovieToCharacter(@PathVariable final Long movieId,
                                                         @PathVariable final Long characterId){
 
-        Character character = characterService.addMovieToCharacter(characterId, movieId);
+        Characters character = characterService.addMovieToCharacter(characterId, movieId);
         return new ResponseEntity<>(CharacterDto.from(character), HttpStatus.OK);
     }
 
@@ -45,7 +45,7 @@ public class CharacterController {
     @DeleteMapping(value="{characterId}/movie/{movieId}/remove")
     public ResponseEntity<CharacterDto> deleteMovieFromCharacter(@PathVariable final Long movieId,
                                                             @PathVariable final Long characterId){
-        Character character = characterService.removeMovieFromCharacter(movieId, characterId);
+        Characters character = characterService.removeMovieFromCharacter(movieId, characterId);
         return new ResponseEntity<>(CharacterDto.from(character), HttpStatus.OK);
     }
 
@@ -57,7 +57,7 @@ public class CharacterController {
 //        for(Movie movies: character.getMovies()){
 //            characterService.deleteCharacter(movies.getId());
 //        }
-        Character character = characterService.deleteCharacter(id);
+        Characters character = characterService.deleteCharacter(id);
 
 
 
@@ -66,7 +66,7 @@ public class CharacterController {
 
     @GetMapping(params = "name")
     public ResponseEntity<List<CharacterDto>> getCharacterByName(@RequestParam(value = "name", required = false) String name){
-        List<Character> characters =characterService.getCharacterByName(name);
+        List<Characters> characters =characterService.getCharacterByName(name);
 
         List<CharacterDto> charactersDto = characters.stream().map(CharacterDto::from).collect(Collectors.toList());
 
@@ -75,7 +75,7 @@ public class CharacterController {
 
     @GetMapping(params = "age")
     public ResponseEntity<List<CharacterDto>> getCharacterByAge(@RequestParam(value = "age", required = false) Integer age){
-        List<Character> characters =characterService.getCharacterByAge(age);
+        List<Characters> characters =characterService.getCharacterByAge(age);
 
         List<CharacterDto> charactersDto = characters.stream().map(CharacterDto::from).collect(Collectors.toList());
 
@@ -84,7 +84,7 @@ public class CharacterController {
 
     @GetMapping(params = "movie")
     public ResponseEntity<List<CharacterDto>> getByName(@RequestParam(value = "movie") Long idMovie){
-        List<Character> characters =characterService.getCharacterByMovie(idMovie);
+        List<Characters> characters =characterService.getCharacterByMovie(idMovie);
 
         List<CharacterDto> charactersDto = characters.stream().map(CharacterDto::from).collect(Collectors.toList());
 
@@ -95,7 +95,7 @@ public class CharacterController {
 
     @GetMapping
     public ResponseEntity<List<CharacterDtoFilter>> getCharacters() {
-        List<Character> characters =characterService.getCharacters();
+        List<Characters> characters =characterService.getCharacters();
 
         List<CharacterDtoFilter> charactersDto = characters.stream().map(CharacterDtoFilter::from).collect(Collectors.toList());
         if(charactersDto.isEmpty()){
@@ -108,11 +108,11 @@ public class CharacterController {
     // get list with movies
     @GetMapping("/list")
     public ResponseEntity<List<CharacterDto>> getCharactersList() {
-        List<Character> characters =characterService.getCharacters();
+        List<Characters> characters =characterService.getCharacters();
 
         List<CharacterDto> charactersDto;
         List<CharacterDto> list = new ArrayList<>();
-        for (Character character : characters) {
+        for (Characters character : characters) {
             CharacterDto from = CharacterDto.from(character);
             list.add(from);
         }
@@ -124,7 +124,7 @@ public class CharacterController {
 
     @GetMapping(value="{id}")
     public ResponseEntity<CharacterDto> getCharacter(@PathVariable final Long id){
-        Character character = characterService.getCharacter(id);
+        Characters character = characterService.getCharacter(id);
         return new ResponseEntity<>(CharacterDto.from(character),HttpStatus.OK);
 
     }
@@ -133,7 +133,7 @@ public class CharacterController {
     public ResponseEntity<CharacterDto> editCharacter(@PathVariable final Long id,
                                                  @RequestBody final CharacterDto characterDto){
 
-        Character editedCharacter = characterService.editCharacter(id,Character.from(characterDto));
+        Characters editedCharacter = characterService.editCharacter(id,Characters.from(characterDto));
         return new ResponseEntity<>(CharacterDto.from(editedCharacter),HttpStatus.OK);
 
     }

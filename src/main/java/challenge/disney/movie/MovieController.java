@@ -1,7 +1,6 @@
 package challenge.disney.movie;
 
 
-import challenge.disney.character.Character;
 import challenge.disney.character.CharacterDto;
 import challenge.disney.character.CharacterService;
 import challenge.disney.genre.Genre;

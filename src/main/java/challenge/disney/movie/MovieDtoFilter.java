@@ -1,6 +1,5 @@
 package challenge.disney.movie;
 
-import challenge.disney.character.Character;
 import challenge.disney.genre.Genre;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

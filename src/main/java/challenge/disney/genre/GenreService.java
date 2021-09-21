@@ -1,6 +1,5 @@
 package challenge.disney.genre;
 
-import challenge.disney.character.Character;
 import challenge.disney.exception.CharacterNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

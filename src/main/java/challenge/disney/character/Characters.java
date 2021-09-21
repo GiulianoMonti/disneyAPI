@@ -19,7 +19,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Character {
+public class Characters {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,7 +37,7 @@ public class Character {
             inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private List<Movie> movies = new ArrayList<>();
 
-    public Character(String image, String name, Integer age, Integer weight, String story, List<Movie> movies) {
+    public Characters(String image, String name, Integer age, Integer weight, String story, List<Movie> movies) {
         this.image = image;
         this.name = name;
         this.age = age;
@@ -55,8 +55,8 @@ public class Character {
         movies.remove(movie);
     }
 
-    public static Character from(CharacterDto characterDto) {
-        Character character = new Character();
+    public static Characters from(CharacterDto characterDto) {
+        Characters character = new Characters();
         character.setImage(characterDto.getImage());
         character.setName(characterDto.getName());
         character.setAge(characterDto.getAge());

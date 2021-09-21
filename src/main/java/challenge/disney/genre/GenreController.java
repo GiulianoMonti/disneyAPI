@@ -1,6 +1,5 @@
 package challenge.disney.genre;
 
-import challenge.disney.character.Character;
 import challenge.disney.character.CharacterDto;
 import challenge.disney.character.CharacterDtoFilter;
 import challenge.disney.character.CharacterService;
