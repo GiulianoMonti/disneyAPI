@@ -62,11 +62,23 @@ class CharacterTests {
     @Test
     void getCharactersByName() throws Exception {
 
-        when(characterService.getCharacterByName("takeshi")).thenReturn(Collections.singletonList(first));
+        when(characterService.getCharacterByName("motoko")).thenReturn(Collections.singletonList(second));
 
-        mockMvc.perform(get("/characters?name=takeshi"))
+        mockMvc.perform(get("/characters?name=motoko"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].name").value("takeshi"));
+                .andExpect(jsonPath("$[0].name").value("motoko"));
+
+    }
+
+    @Test
+    void findCharacterByAge() throws Exception {
+
+        when(characterService.getCharacterByAge(30)).thenReturn(Collections.singletonList(second));
+
+        mockMvc.perform(get("/characters?age=30"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].age").value(30));
+
 
     }
 
