@@ -16,6 +16,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.*;
+
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -58,5 +59,15 @@ class CharacterTests {
                 .andExpect(jsonPath("$", hasSize(2)));
     }
 
+    @Test
+    void getCharactersByName() throws Exception {
+
+        when(characterService.getCharacterByName("takeshi")).thenReturn(Collections.singletonList(first));
+
+        mockMvc.perform(get("/characters?name=takeshi"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].name").value("takeshi"));
+
+    }
 
 }
