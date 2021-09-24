@@ -2,13 +2,11 @@ package challenge.disney.utils.security;
 
 import challenge.disney.utils.SpringApplicationContext;
 import challenge.disney.utils.model.request.UserLoginRequestModel;
-import challenge.disney.utils.service.UserService;
-import challenge.disney.utils.shared.dto.UserDto;
+import challenge.disney.services.UserService;
+import challenge.disney.entity.dto.UserDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,7 +14,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.imageio.IIOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

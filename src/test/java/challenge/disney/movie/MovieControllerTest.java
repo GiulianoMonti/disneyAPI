@@ -1,8 +1,8 @@
 package challenge.disney.movie;
 
-import challenge.disney.character.CharacterController;
-import challenge.disney.character.CharacterRepository;
-import challenge.disney.character.CharacterService;
+import challenge.disney.controller.MovieController;
+import challenge.disney.repositories.MovieRepository;
+import challenge.disney.services.impl.MovieServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -36,7 +34,7 @@ class MovieControllerTest {
     @MockBean
     MovieRepository movieRepository;
     @MockBean
-    MovieService movieService;
+    MovieServiceImpl movieService;
 
     @Autowired
     private MockMvc mockMvc;

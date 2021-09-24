@@ -2,11 +2,11 @@
 //
 //
 //import challenge.disney.character.Character;
-//import challenge.disney.character.CharacterRepository;
-//import challenge.disney.genre.Genre;
-//import challenge.disney.genre.GenreRepository;
-//import challenge.disney.movie.Movie;
-//import challenge.disney.movie.MovieRepository;
+//import challenge.disney.repositories.CharacterRepository;
+//import challenge.disney.entity.Genre;
+//import challenge.disney.repositories.GenreRepository;
+//import challenge.disney.entity.Movie;
+//import challenge.disney.repositories.MovieRepository;
 //
 //import org.springframework.context.ApplicationListener;
 //import org.springframework.context.event.ContextRefreshedEvent;

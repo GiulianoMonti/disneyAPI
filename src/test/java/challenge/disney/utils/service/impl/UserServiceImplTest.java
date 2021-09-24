@@ -1,8 +1,9 @@
 package challenge.disney.utils.service.impl;
 
-import challenge.disney.utils.entity.UserEntity;
-import challenge.disney.utils.repositories.UserRepository;
-import challenge.disney.utils.shared.dto.UserDto;
+import challenge.disney.services.impl.UserServiceImpl;
+import challenge.disney.entity.UserEntity;
+import challenge.disney.repositories.UserRepository;
+import challenge.disney.entity.dto.UserDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
