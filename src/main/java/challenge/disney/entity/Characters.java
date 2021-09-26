@@ -12,7 +12,6 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class Characters {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,21 +23,12 @@ public class Characters {
     private Integer weight;
     private String story;
 
-    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(name = "characters_movies",
             joinColumns = @JoinColumn(name = "character_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private List<Movie> movies = new ArrayList<>();
 
-    public Characters(String image, String name, Integer age, Integer weight, String story, List<Movie> movies) {
-        this.image = image;
-        this.name = name;
-        this.age = age;
-        this.weight = weight;
-        this.story = story;
-        this.movies = movies;
-    }
 
 
     public void addMovies(Movie movie) {

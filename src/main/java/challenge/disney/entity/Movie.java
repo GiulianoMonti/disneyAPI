@@ -44,4 +44,14 @@ public class Movie {
     private List<Characters> characters= new ArrayList<>();
 
 
+    public static Movie from(MovieDto movieDto) {
+        Movie movie = new Movie();
+        movie.setImage(movieDto.getImage());
+        movie.setTitle(movieDto.getTitle());
+        movie.setDate(movieDto.getDate());
+        movie.setRating(movieDto.getRating());
+        movie.setGenre(movieDto.getGenre());
+        movie.setCharacters(movieDto.getCharacter());
+        return movie;
+    }
 }

@@ -2,7 +2,9 @@ package challenge.disney.entity.dto;
 
 import challenge.disney.entity.Characters;
 import challenge.disney.entity.Movie;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +20,7 @@ public class CharacterDto {
     private Integer weight;
     private String story;
 
-    private List <Movie> movies = new ArrayList<>();
-
+    private List <Movie> movies ;
 
     public static CharacterDto from(Characters character){
         CharacterDto characterDto = new CharacterDto();
@@ -34,3 +35,5 @@ public class CharacterDto {
     }
 
 }
+
+

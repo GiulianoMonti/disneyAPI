@@ -30,81 +30,101 @@ public class MovieController {
     }
 
     @PostMapping
-    public ResponseEntity<Movie> addMovie(@RequestBody final Movie movie) throws NotContextException {
-
-
-        Movie movies = movieService.addMovie(movie);
-        return new ResponseEntity<>(movies, HttpStatus.OK);
+    public ResponseEntity<MovieDto> addMovie(@RequestBody final MovieDto movieDto) {
+        Movie movie = movieService.addMovie(Movie.from(movieDto));
+        return new ResponseEntity<>(MovieDto.from(movie), HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<List<MovieDtoFilter>> getMovies() {
-
-        return new ResponseEntity<>(movieService.getMovies(), HttpStatus.OK);
+        List<Movie> movies = movieService.getMovies();
+        List<MovieDtoFilter> moviesDtoFilter = movies.stream().map(MovieDtoFilter::from).collect(Collectors.toList());
+        return new ResponseEntity<>(moviesDtoFilter, HttpStatus.OK);
     }
 
+    // list
     @GetMapping("/list")
     public ResponseEntity<List<MovieDto>> getMovieList() {
-        List<MovieDto> movies = movieService.getMoviesList();
+        List<Movie> movies = movieService.getMovies();
 
-
-        return new ResponseEntity<>(movies, HttpStatus.OK);
+        List<MovieDto> movieDto;
+        List<MovieDto> list = new ArrayList<>();
+        for (Movie movie : movies) {
+            MovieDto from = MovieDto.from(movie);
+            list.add(from);
+        }
+        movieDto = list;
+        return new ResponseEntity<>(movieDto, HttpStatus.OK);
 
     }
 
     @GetMapping(value = "{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable final Long id) {
-        Movie movie = movieService.getMovieById(id);
-        return new ResponseEntity<>(movie, HttpStatus.OK);
+    public ResponseEntity<MovieDto> getMovie(@PathVariable final Long id) {
+        Movie movie = movieService.getMovie(id);
+        return new ResponseEntity<>(MovieDto.from(movie), HttpStatus.OK);
 
     }
-
     @GetMapping(params = "name")
-    public ResponseEntity<List<MovieDto>> getMovieByName(@RequestParam(value = "name", required = false) String name) {
-        List<MovieDto> movies = movieService.findByTitle(name);
-        return new ResponseEntity<>(movies, HttpStatus.OK);
+    public ResponseEntity<List<MovieDto>> getMovieByName(@RequestParam(value = "name", required = false) String name){
+
+        List<Movie> movies =movieService.findByTitle(name);
+        List<MovieDto> moviesDto = new ArrayList<>();
+        for (Movie movie : movies) {
+            MovieDto from = MovieDto.from(movie);
+            moviesDto.add(from);
+        }
+        return new ResponseEntity<>(moviesDto, HttpStatus.OK);
+
     }
 
     @GetMapping(params = "genre")
-    public ResponseEntity<List<MovieDto>> getMovieByGenre(@RequestParam(value = "genre", required = false) Long genreId) {
+    public ResponseEntity<List<MovieDto>> getMovieByGenre(@RequestParam(value = "genre", required = false) Long genreId){
 
-        List<MovieDto> movies = movieService.findByGenre(genreId);
+        List<Movie> movies =movieService.findByGenre(genreId);
+        List<MovieDto> moviesDto = new ArrayList<>();
+        for (Movie movie : movies) {
+            MovieDto from = MovieDto.from(movie);
+            moviesDto.add(from);
+        }
+        return new ResponseEntity<>(moviesDto, HttpStatus.OK);
 
-        return movies.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(movies, HttpStatus.OK);
     }
-
     @GetMapping(params = "order")
-    public ResponseEntity<List<Movie>> getMovieByDate(@RequestParam(value = "order", required = false) String order) {
+    public ResponseEntity<List<MovieDto>> getMovieByDate(@RequestParam(value = "order", required = false) String order){
 
-        List<Movie> movies = movieService.sortByDate(order);
-
-        return movies.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(movies, HttpStatus.OK);
+        List<Movie> movies =movieService.sortByDate(order);
+        List<MovieDto> moviesDto = new ArrayList<>();
+        for (Movie movie : movies) {
+            MovieDto from = MovieDto.from(movie);
+            moviesDto.add(from);
+        }
+        return new ResponseEntity<>(moviesDto, HttpStatus.OK);
 
     }
 
 
     @DeleteMapping(value = "{id}")
-    public ResponseEntity<Movie> deleteMovie(@PathVariable final Long id) {
+    public ResponseEntity<MovieDto> deleteMovie(@PathVariable final Long id) {
         Movie movie = movieService.deleteMovie(id);
-        return new ResponseEntity<>(movie, HttpStatus.OK);
+        return new ResponseEntity<>(MovieDto.from(movie), HttpStatus.OK);
 
     }
 
     @PutMapping(value = "{id}")
-    public ResponseEntity<Movie> editMovie(@PathVariable final Long id,
-                                           @RequestBody final Movie movies) {
-        Movie movie = movieService.editMovie(id, movies);
-        return new ResponseEntity<>(movie, HttpStatus.OK);
+    public ResponseEntity<MovieDto> editMovie(@PathVariable final Long id,
+                                              @RequestBody final MovieDto movieDto) {
+        Movie movie = movieService.editMovie(id, Movie.from(movieDto));
+        return new ResponseEntity<>(MovieDto.from(movie), HttpStatus.OK);
 
     }
 
-//    @PostMapping(value = "{movieId}/genre/{genreId}/add")
-//    public ResponseEntity<MovieDto> addGenreToMovie(@PathVariable final Long movieId,
-//                                                    @PathVariable final Long genreId) {
-//        Movie movie = movieService.addGenreToMovie(movieId, genreId);
-//
-//        return new ResponseEntity<>(MovieDto.from(movie), HttpStatus.OK);
-//    }
+    @PostMapping(value = "{movieId}/genre/{genreId}/add")
+    public ResponseEntity<MovieDto> addGenreToMovie(@PathVariable final Long movieId,
+                                                    @PathVariable final Long genreId) {
+        Movie movie = movieService.addGenreToMovie(movieId, genreId);
+
+        return new ResponseEntity<>(MovieDto.from(movie), HttpStatus.OK);
+    }
 
 
 }

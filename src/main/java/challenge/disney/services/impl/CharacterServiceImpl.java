@@ -1,25 +1,39 @@
 package challenge.disney.services.impl;
 
+import challenge.disney.entity.dto.CharacterDto;
+import challenge.disney.entity.dto.CharacterDtoFilter;
+import challenge.disney.entity.dto.MovieDto;
+import challenge.disney.entity.dto.MovieDtoFilter;
 import challenge.disney.repositories.CharacterRepository;
 import challenge.disney.entity.Characters;
 import challenge.disney.exception.CharacterNotFoundException;
 import challenge.disney.entity.Movie;
+import challenge.disney.repositories.MovieRepository;
+import challenge.disney.services.CharacterService;
+import challenge.disney.services.MovieService;
+import challenge.disney.services.impl.MovieServiceImpl;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @Service
-public class CharacterService {
+public class CharacterServiceImpl implements CharacterService {
 
     @Autowired
+
     private CharacterRepository repo;
     @Autowired
-    private MovieServiceImpl movieService;
+
+    private MovieService movieService;
+
+
 
     public Characters addCharacter(Characters character){
 
@@ -73,7 +87,7 @@ public class CharacterService {
     @Transactional
     public Characters addMovieToCharacter(Long characterId, Long movieId){
         Characters character = getCharacter(characterId);
-        Movie movie = movieService.getMovieById(movieId);
+        Movie movie = movieService.getMovie(movieId);
 //        if(Objects.nonNull(movie.getCharacters())){
 //            throw new MovieIsAlreadyAssignedException(movieId,
 //                    movie.getCharacters().getId());
@@ -83,20 +97,19 @@ public class CharacterService {
         return character;
     }
 
-        @Transactional
-        public Characters removeMovieFromCharacter(Long movieId, Long characterId){
-            Characters character = getCharacter(characterId);
-        Movie movie = movieService.getMovieById(movieId);
+    @Transactional
+    public Characters removeMovieFromCharacter(Long movieId, Long characterId){
+        Characters character = getCharacter(characterId);
+        Movie movie = movieService.getMovie(movieId);
         character.removeMovies(movie);
         return character;
     }
 
     public Long getCharacterId(Long id){
         Characters character = getCharacter(id);
-      return  character.getId();
+        return  character.getId();
 
     }
 
 
 }
-

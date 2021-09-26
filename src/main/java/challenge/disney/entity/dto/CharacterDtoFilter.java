@@ -1,9 +1,13 @@
 package challenge.disney.entity.dto;
 
 import challenge.disney.entity.Characters;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CharacterDtoFilter {
     private Long id;
 

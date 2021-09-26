@@ -6,11 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CharacterRepository extends JpaRepository<Characters, Long> {
 
-
+    Optional<Characters> findById(Long id);
     public List<Characters> findByName(String name);
 
     public List<Characters> findByAge(Integer age);

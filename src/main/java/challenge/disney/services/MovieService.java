@@ -9,11 +9,10 @@ import java.util.Optional;
 
 public interface MovieService {
 
-    List<MovieDtoFilter> getMovies();
+    List<Movie> getMovies();
 
-    Movie getMovieById(Long id);
+    Movie getMovie(Long id);
 
-    public List<MovieDto> getMoviesList() ;
 
 //    List<Movie> getAllAttributesOfMoviesOrSeries();
 

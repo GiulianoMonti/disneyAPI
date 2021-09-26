@@ -8,6 +8,7 @@ import challenge.disney.entity.dto.MovieDtoFilter;
 import challenge.disney.repositories.MovieRepository;
 import challenge.disney.exception.MovieNotFoundException;
 import challenge.disney.entity.Genre;
+import challenge.disney.services.CharacterService;
 import challenge.disney.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,39 +32,34 @@ public class MovieServiceImpl implements MovieService {
         this.genreService = genreService;
     }
 
-    public Movie addMovie(Movie movie) {
 
+
+    public Movie addMovie(Movie movie) {
         return movieRepository.save(movie);
     }
 
-    public List<MovieDtoFilter> getMovies() {
-        List<Movie> movies = movieRepository.findAll();
-        return movies.stream().map(movie -> new MovieDtoFilter(movie.getId(), movie.getImage(), movie.getTitle(), movie.getDate())).collect(Collectors.toList());
+    public List<Movie> getMovies() {
+        return StreamSupport
+                .stream(movieRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
     }
 
-    public List<MovieDto> getMoviesList() {
-        List<Movie> movies = movieRepository.findAll();
-        return movies.stream().map(movie -> new MovieDto(movie.getId(), movie.getImage(), movie.getTitle(), movie.getDate(), movie.getRating()
-                , movie.getGenre(), movie.getCharacters())).collect(Collectors.toList());
-    }
-
-
-    public Movie getMovieById(Long id) {
-
+    public Movie getMovie(Long id) {
         return movieRepository.findById(id).orElseThrow(() ->
                 new MovieNotFoundException(id));
     }
 
 
     public Movie deleteMovie(Long id) {
-        Movie movie = getMovieById(id);
-
+        Movie movie = getMovie(id);
+//        characterService.deleteCharacter(id);
         movieRepository.delete(movie);
         return movie;
     }
 
+    // edited and persisted in the database
     public Movie editMovie(Long id, Movie movie) {
-        Movie movieToEdit = getMovieById(id);
+        Movie movieToEdit = getMovie(id);
         movieToEdit.setRating(movie.getRating());
         movieToEdit.setCharacters(movie.getCharacters());
         movieToEdit.setGenre(movie.getGenre());
@@ -72,28 +68,22 @@ public class MovieServiceImpl implements MovieService {
         return movieRepository.save(movieToEdit);
     }
 
-//    public Movie addGenreToMovie(Long genreId, Long movieId) {
-//        Movie movie = getMovie(movieId);
-//        Genre genre = genreService.getGenre(genreId);
-////        if(Objects.nonNull(character.getMovies())){
-////            throw new MovieIsAlreadyAssignedException(characterId, character.getMovies().get());
-////        }
-//        movie.setGenre(genre);
-//        return movie;
-//    }
-
-    public List<MovieDto> findByTitle(String name) {
-        List<Movie> movies = movieRepository.findByTitle(name);
-
-        return movies.stream().map(movie -> new MovieDto(movie.getId(), movie.getImage(), movie.getTitle(), movie.getDate(), movie.getRating()
-                , movie.getGenre(), movie.getCharacters())).collect(Collectors.toList());
+    public Movie addGenreToMovie(Long genreId, Long movieId) {
+        Movie movie = getMovie(movieId);
+        Genre genre = genreService.getGenre(genreId);
+//        if(Objects.nonNull(character.getMovies())){
+//            throw new MovieIsAlreadyAssignedException(characterId, character.getMovies().get());
+//        }
+        movie.setGenre(genre);
+        return movie;
     }
 
-    public List<MovieDto> findByGenre(Long genreId) {
-        List<Movie> movies = movieRepository.findByGenre(genreId);
+    public List<Movie> findByTitle(String name) {
+        return movieRepository.findByTitle(name);
+    }
 
-        return movies.stream().map(movie -> new MovieDto(movie.getId(), movie.getImage(), movie.getTitle(), movie.getDate(), movie.getRating()
-                , movie.getGenre(), movie.getCharacters())).collect(Collectors.toList());
+    public List<Movie> findByGenre(Long genreId) {
+        return movieRepository.findByGenre(genreId);
     }
 
 
@@ -101,6 +91,7 @@ public class MovieServiceImpl implements MovieService {
 
         return "ASC".equals(order) ? movieRepository.sortDateAsc()
                 : "DESC".equals(order) ? movieRepository.sortDateDesc() : null;
+
 
     }
 }

@@ -18,6 +18,14 @@ public class MovieDtoFilter {
 
     private LocalDate date;
 
+    public static MovieDtoFilter from(Movie movie) {
+        MovieDtoFilter movieDto = new MovieDtoFilter();
+        movieDto.setId(movie.getId());
+        movieDto.setImage(movie.getImage());
+        movieDto.setTitle(movie.getTitle());
+        movieDto.setDate(movie.getDate());
 
+        return movieDto;
+    }
 }
 

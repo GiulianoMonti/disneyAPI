@@ -24,6 +24,22 @@ public class MovieDto {
     private List<Characters> character=new ArrayList<>();
 
 
-
+    public static MovieDto from(Movie movie) {
+        MovieDto movieDto = new MovieDto();
+        movieDto.setId(movie.getId());
+        movieDto.setImage(movie.getImage());
+        movieDto.setTitle(movie.getTitle());
+        movieDto.setDate(movie.getDate());
+        movieDto.setRating(movie.getRating());
+        movieDto.setGenre(movie.getGenre());
+        movieDto.setCharacter(movie.getCharacters());
+//        List<CharacterDto> list = new ArrayList<>();
+//        for (Character character : movie.getCharacters()) {
+//            CharacterDto from = CharacterDto.from(character);
+//            list.add(from);
+//        }
+//        movieDto.setCharactersDto(list);
+        return movieDto;
+    }
 }
 
